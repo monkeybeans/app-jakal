@@ -1,6 +1,8 @@
 import React from 'react';
 import Header from './components/header';
 
+import './style/reset.scss';
+
 const App = () => (
   <div>
     <Header />
