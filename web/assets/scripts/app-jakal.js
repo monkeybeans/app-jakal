@@ -21431,6 +21431,10 @@
 
 	var _header2 = _interopRequireDefault(_header);
 
+	var _sectionCurrent = __webpack_require__(181);
+
+	var _sectionCurrent2 = _interopRequireDefault(_sectionCurrent);
+
 	__webpack_require__(179);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -21440,6 +21444,7 @@
 	    'div',
 	    null,
 	    _react2.default.createElement(_header2.default, null),
+	    _react2.default.createElement(_sectionCurrent2.default, null),
 	    _react2.default.createElement(
 	      'div',
 	      null,
@@ -21887,6 +21892,163 @@
 
 	// exports
 
+
+/***/ },
+/* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _current = __webpack_require__(182);
+
+	var _current2 = _interopRequireDefault(_current);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _current2.default;
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _addSuggestion = __webpack_require__(183);
+
+	var _addSuggestion2 = _interopRequireDefault(_addSuggestion);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Current = function (_React$Component) {
+	  _inherits(Current, _React$Component);
+
+	  function Current() {
+	    _classCallCheck(this, Current);
+
+	    return _possibleConstructorReturn(this, (Current.__proto__ || Object.getPrototypeOf(Current)).apply(this, arguments));
+	  }
+
+	  _createClass(Current, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(_addSuggestion2.default, null);
+	    }
+	  }]);
+
+	  return Current;
+	}(_react2.default.Component);
+
+	exports.default = Current;
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _addSuggestion = __webpack_require__(184);
+
+	var _addSuggestion2 = _interopRequireDefault(_addSuggestion);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _addSuggestion2.default;
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AddSuggestion = function (_React$Component) {
+	  _inherits(AddSuggestion, _React$Component);
+
+	  function AddSuggestion() {
+	    _classCallCheck(this, AddSuggestion);
+
+	    return _possibleConstructorReturn(this, (AddSuggestion.__proto__ || Object.getPrototypeOf(AddSuggestion)).apply(this, arguments));
+	  }
+
+	  _createClass(AddSuggestion, [{
+	    key: 'submitSuggestion',
+	    value: function submitSuggestion(event) {
+	      event.preventDefault();
+
+	      console.log('Submitted...');
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'add-suggestion' },
+	        _react2.default.createElement(
+	          'form',
+	          { method: 'POST', action: '', onSubmit: this.submitSuggestion },
+	          _react2.default.createElement(
+	            'label',
+	            { htmlFor: 'add-suggestion__name' },
+	            'Suggestion Name'
+	          ),
+	          _react2.default.createElement('input', { id: 'add-suggestion__name' }),
+	          _react2.default.createElement(
+	            'label',
+	            { htmlFor: 'add-suggestion__description' },
+	            'What makes this so great?'
+	          ),
+	          _react2.default.createElement('input', { id: 'add-suggestion__description' }),
+	          _react2.default.createElement('input', { type: 'submit', value: 'Add your suggestion' })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return AddSuggestion;
+	}(_react2.default.Component);
+
+	exports.default = AddSuggestion;
 
 /***/ }
 /******/ ]);
