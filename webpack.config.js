@@ -1,7 +1,9 @@
+const path = require('path');
+
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: __dirname + '/web/assets/scripts',
+    path: path.join(__dirname, '/web/assets/scripts'),
     filename: 'app-jakal.js',
   },
 
@@ -25,4 +27,6 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
+
+  devtool: '#inline-source-map',
 };
