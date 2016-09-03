@@ -19,13 +19,13 @@ class VotingList extends React.Component {
     api
     .get('/api/suggestions/fresh')
     .then(response => this.setState({ suggestions: response }))
-    .catch(e => console.log(e));
+    .catch(e => console.log(`could not get fresh suggestions: ${e}`));
   }
 
   voteForThis(event) {
     api
     .put(`/api/suggestions/${event.target.value}/vote`)
-    .catch(e => console.log(e));
+    .catch(e => console.log(`could not vote for suggestion: ${e}`));
   }
 
   renderVoteItem(suggestion) {

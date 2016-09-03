@@ -14,7 +14,7 @@ class AddSuggestion extends React.Component {
       name: suggestionName,
       description: suggestionDescription,
     })
-    .catch(e => console.log(e));
+    .catch(e => console.log(`could not add suggestion: ${e}`));
   }
 
   render() {
