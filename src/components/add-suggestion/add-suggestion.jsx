@@ -9,10 +9,12 @@ class AddSuggestion extends React.Component {
     const suggestionName = document.getElementById('suggestion-name').value;
     const suggestionDescription = document.getElementById('suggestion-description').value;
 
-    api.post('/api/suggestions', {
+    api
+    .post('/api/suggestions', {
       name: suggestionName,
       description: suggestionDescription,
-    });
+    })
+    .catch(e => console.log(e));
   }
 
   render() {
