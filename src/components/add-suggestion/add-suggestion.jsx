@@ -1,20 +1,20 @@
 import React from 'react';
 import { FormControl, ControlLabel, FormGroup, Button } from 'react-bootstrap';
-
-import api from './../../api';
+import actions /* { addSuggestion } */ from '../../actions';
 
 class AddSuggestion extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.submitSuggestion = this.submitSuggestion.bind(this);
+  }
+
   submitSuggestion(event) {
     event.preventDefault();
-    const suggestionName = document.getElementById('suggestion-name').value;
-    const suggestionDescription = document.getElementById('suggestion-description').value;
+    const name = document.getElementById('suggestion-name').value;
+    const description = document.getElementById('suggestion-description').value;
 
-    api
-    .post('/api/suggestions', {
-      name: suggestionName,
-      description: suggestionDescription,
-    })
-    .catch(e => console.log(`could not add suggestion: ${e}`));
+    actions.addSuggestion(name, description);
   }
 
   render() {
@@ -27,7 +27,6 @@ class AddSuggestion extends React.Component {
               id="suggestion-name"
               type="text"
               placeholder="Suggestion name"
-              defaultValue="banan"
             />
           </FormGroup>
           <FormGroup>
@@ -39,7 +38,6 @@ class AddSuggestion extends React.Component {
               name="newSuggestionSummary"
               rows="10"
               cols="50"
-              defaultValue="oh ohoho oho hh"
             />
           </FormGroup>
           <Button type="submit" bsStyle="primary">Add your suggestion</Button>

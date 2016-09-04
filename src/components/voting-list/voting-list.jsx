@@ -1,31 +1,26 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
+import actions, { fetchSuggestions, voteForSuggestion } from '../../actions';
 
-import api from './../../api';
+if (fetchSuggestions || voteForSuggestion) {
+  throw new Error(`IT IS WORKING!!!!! ${typeof fetchSuggestions} ${typeof voteForSuggestion}`);
+}
 
 class VotingList extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      suggestions: [],
-    };
 
     this.voteForThis = this.voteForThis.bind(this);
     this.renderVoteItem = this.renderVoteItem.bind(this);
   }
 
   componentWillMount() {
-    api
-    .get('/api/suggestions/fresh')
-    .then(response => this.setState({ suggestions: response }))
-    .catch(e => console.log(`could not get fresh suggestions: ${e}`));
+    actions.fetchSuggestions();
   }
 
   voteForThis(event) {
-    api
-    .put(`/api/suggestions/${event.target.value}/vote`)
-    .catch(e => console.log(`could not vote for suggestion: ${e}`));
+    actions.voteForSuggestion(event.target.value);
   }
 
   renderVoteItem(suggestion) {
@@ -44,10 +39,21 @@ class VotingList extends React.Component {
     return (
       <div className="vote-list">
         <h2>Current suggestions</h2>
-        { this.state.suggestions.map(this.renderVoteItem) }
+        { this.props.suggestions.map(this.renderVoteItem) }
       </div>
     );
   }
 }
 
-export default VotingList;
+VotingList.propTypes = {
+  dispatch: React.PropTypes.func,
+  suggestions: React.PropTypes.array,
+};
+
+const mapStateToProps = state => (
+  {
+    suggestions: state.suggestions,
+  }
+);
+
+export default connect(mapStateToProps)(VotingList);
