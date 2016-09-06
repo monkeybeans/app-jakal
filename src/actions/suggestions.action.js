@@ -1,5 +1,5 @@
 import api from '../api';
-import Suggestion from '../models/suggestion';
+import { Suggestion } from '../models/suggestion';
 import { dispatch } from '../store';
 
 function updateStateSuggestions(suggestions) {

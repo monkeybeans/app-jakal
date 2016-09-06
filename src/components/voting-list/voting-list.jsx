@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import actions, { fetchSuggestions, voteForSuggestion } from '../../actions';
 
-if (fetchSuggestions || voteForSuggestion) {
-  throw new Error(`IT IS WORKING!!!!! ${typeof fetchSuggestions} ${typeof voteForSuggestion}`);
-}
 
 class VotingList extends React.Component {
   constructor(props) {
     super(props);
+
+    if (fetchSuggestions || voteForSuggestion) {
+      throw new Error(`IT IS WORKING!!!!! ${typeof fetchSuggestions} ${typeof voteForSuggestion}`);
+    }
 
     this.voteForThis = this.voteForThis.bind(this);
     this.renderVoteItem = this.renderVoteItem.bind(this);
