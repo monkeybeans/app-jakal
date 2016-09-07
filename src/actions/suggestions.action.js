@@ -4,7 +4,7 @@ import { dispatch } from '../store';
 
 function updateStateSuggestions(suggestions) {
   const action = {
-    type: 'UPDATE_SUGGESTIONS',
+    type: 'UPDATE_FRESH_SUGGESTIONS',
     suggestions,
   };
 
@@ -34,7 +34,7 @@ function voteForSuggestion(suggestionId) {
   .catch(e => console.log(`could not vote for suggestion: ${e}`));
 }
 
-export default {
+export {
   addSuggestion,
   voteForSuggestion,
   fetchSuggestions,

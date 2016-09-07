@@ -1,13 +1,11 @@
 import React from 'react';
 import { FormControl, ControlLabel, HelpBlock, FormGroup, Button } from 'react-bootstrap';
-import action, { addSuggestion } from '../../actions';
+import { addSuggestion } from '../../actions';
 import { SubmitSuggestion } from '../../models/suggestion';
 
 class AddSuggestion extends React.Component {
   constructor(props) {
     super(props);
-
-    if (addSuggestion) throw new Error('export works!!!!');
 
     this.state = { suggestion: new SubmitSuggestion('', '', false) };
 
@@ -36,7 +34,7 @@ class AddSuggestion extends React.Component {
     const subSug = new SubmitSuggestion(name, description, true);
 
     if (subSug.valid === true) {
-      action.addSuggestion(name, description);
+      addSuggestion(name, description);
       this.setState({ suggestion: new SubmitSuggestion('', '', false) });
     } else {
       this.setState({ suggestion: subSug });

@@ -1,27 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import actions, { fetchSuggestions, voteForSuggestion } from '../../actions';
+import { fetchSuggestions, voteForSuggestion } from '../../actions';
 
 
 class VotingList extends React.Component {
   constructor(props) {
     super(props);
 
-    if (fetchSuggestions || voteForSuggestion) {
-      throw new Error(`IT IS WORKING!!!!! ${typeof fetchSuggestions} ${typeof voteForSuggestion}`);
-    }
-
     this.voteForThis = this.voteForThis.bind(this);
     this.renderVoteItem = this.renderVoteItem.bind(this);
   }
 
   componentWillMount() {
-    actions.fetchSuggestions();
+    fetchSuggestions();
   }
 
   voteForThis(event) {
-    actions.voteForSuggestion(event.target.value);
+    voteForSuggestion(event.target.value);
   }
 
   renderVoteItem(suggestion) {
@@ -40,7 +36,7 @@ class VotingList extends React.Component {
     return (
       <div className="vote-list">
         <h2>Current suggestions</h2>
-        { this.props.suggestions.map(this.renderVoteItem) }
+        { this.props.suggestion.freshSuggestions.map(this.renderVoteItem) }
       </div>
     );
   }
@@ -48,12 +44,12 @@ class VotingList extends React.Component {
 
 VotingList.propTypes = {
   dispatch: React.PropTypes.func,
-  suggestions: React.PropTypes.array,
+  suggestion: React.PropTypes.object,
 };
 
 const mapStateToProps = state => (
   {
-    suggestions: state.suggestions,
+    suggestion: state.suggestion,
   }
 );
 

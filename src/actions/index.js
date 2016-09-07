@@ -1,3 +1,13 @@
-import suggestions from './suggestions.action';
+import fetchPeriod from './status.action';
+import {
+  addSuggestion,
+  voteForSuggestion,
+  fetchSuggestions,
+} from './suggestions.action';
 
-export default suggestions;
+export {
+  fetchPeriod,
+  addSuggestion,
+  voteForSuggestion,
+  fetchSuggestions,
+};

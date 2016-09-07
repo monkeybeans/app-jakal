@@ -4,16 +4,24 @@ import Header from './components/header';
 import SectionCurrent from './components/section-current';
 import './style/reset.scss';
 import store from './store';
+import { fetchPeriod } from './actions';
 
+class App extends React.Component {
+  componentWillMount() {
+    fetchPeriod();
+  }
 
-const App = () => (
-  <Provider store={store}>
-    <div>
-      <Header />
-      <SectionCurrent />
-      <div>App Initialised...</div>
-    </div>
-  </Provider>
-);
+  render() {
+    return (
+      <Provider store={store}>
+        <div>
+          <Header />
+          <SectionCurrent />
+          <div>App Initialised...</div>
+        </div>
+      </Provider>
+    );
+  }
+}
 
 export default App;

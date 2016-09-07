@@ -58,7 +58,14 @@ const get = (url, query) => new Promise((res, rej) => {
   xhr.onreadystatechange = () => {
     if (xhr.readyState === XHR_STATUS_DONE) {
       if (HTTP_STATUS_OK <= xhr.status && xhr.status <= HTTP_STATUS_NO_CONTENT) {
-        res(JSON.parse(xhr.response), xhr.status);
+        let body = xhr.response;
+        try {
+          body = JSON.parse(body);
+        } catch (e) {
+          console.log('Non json response recieved, using raw.');
+        }
+
+        res(body, xhr.status);
       } else {
         rej('Could not perform the request.');
       }
