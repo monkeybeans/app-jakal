@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { fetchSuggestions, voteForSuggestion } from '../../actions';
+import './voting-list.scss';
 
 
 class VotingList extends React.Component {

@@ -1,15 +1,17 @@
 import React from 'react';
+import { Row, Col } from 'react-bootstrap';
 import AddSuggestion from '../add-suggestion';
 import VotingList from '../voting-list';
 
-let numSuggestionTouch = 0;
-const suggestionUpdated = () => numSuggestionTouch++;
-
 const Current = () => (
-  <div>
-    <VotingList />
-    <AddSuggestion iHaveNews={suggestionUpdated} />
-  </div>
+  <Row>
+    <Col xs={12}>
+      <VotingList />
+    </Col>
+    <Col xs={12}>
+      <AddSuggestion />
+    </Col>
+  </Row>
 );
 
 export default Current;

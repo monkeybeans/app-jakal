@@ -1,4 +1,5 @@
 import React from 'react';
+import { Grid } from 'react-bootstrap';
 import { Provider } from 'react-redux';
 import Header from './components/header';
 import SectionCurrent from './components/section-current';
@@ -14,10 +15,10 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <div>
+        <Grid>
           <Header />
           <SectionCurrent />
-        </div>
+        </Grid>
       </Provider>
     );
   }

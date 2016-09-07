@@ -1,11 +1,11 @@
 const defaultState = {
-  period: 'display',
+  period: 'DISPLAY',
 };
 
 export default function status(state = defaultState, action) {
   switch (action.type) {
     case 'PERIOD_RECIEVED':
-      return Object.assign({}, state, { period: action.period });
+      return { period: 'SUGGEST' }; // return Object.assign({}, state, { period: action.period });
     default:
       return state;
   }

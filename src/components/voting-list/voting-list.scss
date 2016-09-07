@@ -1,0 +1,26 @@
+.vote-item {
+  border: 1px solid lightgray;
+  margin: 2rem 0;
+  padding: 1rem 2rem 3em 1rem;
+  border-radius: 3px;
+  position: relative;
+
+  h2 {
+    padding: 0 0 1rem 0;
+  }
+
+  .vote-item__num-votes {
+    position: absolute;
+    color: lightyellow;
+    background: lightblue;
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    text-align: center;
+    right: -1rem;
+    top: -1rem;
+    line-height: 5rem;
+    box-shadow: 10px 10px 15px lightgrey;
+    background: radial-gradient(ellipse at 1rem 1rem, #7db9e8 4%,#1e5799 82%);
+  }
+}
