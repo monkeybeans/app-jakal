@@ -20,6 +20,14 @@ class VotingList extends React.Component {
     voteForSuggestion(event.target.value);
   }
 
+  renderVoteButton(suggestionId) {
+    if (this.props.status.period !== 'VOTE') return null;
+
+    return (
+      <Button onClick={this.voteForThis} bsStyle="primary" value={suggestionId}>Vote</Button>
+    );
+  }
+
   renderVoteItem(suggestion) {
     return (
       <div className="vote-item" key={suggestion.id}>
@@ -27,7 +35,7 @@ class VotingList extends React.Component {
           { suggestion.name } <span className="vote-item__num-votes">{suggestion.numVotes}</span>
         </h2>
         <p>{ suggestion.description }</p>
-        <Button onClick={this.voteForThis} bsStyle="primary" value={suggestion.id}>Vote</Button>
+        { this.renderVoteButton(suggestion.id) }
       </div>
     );
   }
@@ -44,8 +52,12 @@ class VotingList extends React.Component {
 
 VotingList.propTypes = {
   suggestion: React.PropTypes.object,
+  status: React.PropTypes.object,
 };
 
-const mapStateToProps = state => ({ suggestion: state.suggestion });
+const mapStateToProps = state => ({
+  suggestion: state.suggestion,
+  status: state.status,
+});
 
 export default connect(mapStateToProps)(VotingList);

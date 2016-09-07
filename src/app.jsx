@@ -17,7 +17,6 @@ class App extends React.Component {
         <div>
           <Header />
           <SectionCurrent />
-          <div>App Initialised...</div>
         </div>
       </Provider>
     );

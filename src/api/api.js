@@ -62,7 +62,7 @@ const get = (url, query) => new Promise((res, rej) => {
         try {
           body = JSON.parse(body);
         } catch (e) {
-          console.log('Non json response recieved, using raw.');
+          console.log(`${cleanUrl} responded with non JSON, using raw. `);
         }
 
         res(body, xhr.status);

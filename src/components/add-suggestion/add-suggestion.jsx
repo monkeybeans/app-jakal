@@ -34,6 +34,8 @@ class AddSuggestion extends React.Component {
 
 
   render() {
+    if (this.props.status.period !== 'SUGGEST') return null;
+
     const { suggestion: { prospect } } = this.props;
 
     return (
@@ -83,8 +85,12 @@ class AddSuggestion extends React.Component {
 
 AddSuggestion.propTypes = {
   suggestion: React.PropTypes.object,
+  status: React.PropTypes.object,
 };
 
-const mapStateToProps = state => ({ suggestion: state.suggestion });
+const mapStateToProps = state => ({
+  suggestion: state.suggestion,
+  status: state.status,
+});
 
 export default connect(mapStateToProps)(AddSuggestion);
