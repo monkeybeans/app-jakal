@@ -43,14 +43,9 @@ class VotingList extends React.Component {
 }
 
 VotingList.propTypes = {
-  dispatch: React.PropTypes.func,
   suggestion: React.PropTypes.object,
 };
 
-const mapStateToProps = state => (
-  {
-    suggestion: state.suggestion,
-  }
-);
+const mapStateToProps = state => ({ suggestion: state.suggestion });
 
 export default connect(mapStateToProps)(VotingList);

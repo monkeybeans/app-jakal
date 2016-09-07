@@ -1,15 +1,24 @@
 import api from '../api';
-import { Suggestion } from '../models/suggestion';
+import { Suggestion, Prospect } from '../models/suggestion';
 import { dispatch } from '../store';
 
-function updateStateSuggestions(suggestions) {
+const updateStateSuggestions = suggestions => {
   const action = {
     type: 'UPDATE_FRESH_SUGGESTIONS',
     suggestions,
   };
 
   dispatch(action);
-}
+};
+
+const updateProspect = (name, description, touch) => {
+  const action = {
+    type: 'UPDATE_SUGGESTION_PROSPECT',
+    prospect: new Prospect(name, description, touch),
+  };
+
+  dispatch(action);
+};
 
 function fetchSuggestions() {
   api
@@ -20,9 +29,10 @@ function fetchSuggestions() {
   .catch(e => console.log(`could not get fresh suggestions: ${e}`));
 }
 
-function addSuggestion(name, description) {
+function addSuggestion(prospect) {
   api
-  .post('/api/suggestions', { name, description })
+  .post('/api/suggestions', { name: prospect.name.val, description: prospect.description.val })
+  .then(() => updateProspect('', '', false))
   .then(fetchSuggestions)
   .catch(e => console.log(`could not add suggestion: ${e}`));
 }
@@ -38,4 +48,5 @@ export {
   addSuggestion,
   voteForSuggestion,
   fetchSuggestions,
+  updateProspect,
 };

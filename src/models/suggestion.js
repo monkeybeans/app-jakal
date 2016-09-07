@@ -8,13 +8,13 @@ export class Suggestion {
 }
 
 
-export class SubmitSuggestion {
+export class Prospect {
   constructor(name, description, touch = true) {
     this.name = {
       val: name,
       touched: touch,
       valid: false,
-      helpText: `Must be more than ${SubmitSuggestion.minNameLength} characters long...`,
+      helpText: `Must be more than ${Prospect.minNameLength} characters long...`,
     };
 
     this.description = {
@@ -32,11 +32,11 @@ export class SubmitSuggestion {
   validate() {
     const { name, description } = this;
 
-    if (name.val && name.val.length > SubmitSuggestion.minNameLength) {
+    if (name.val && name.val.length > Prospect.minNameLength) {
       name.valid = true;
     }
 
-    if (description.val && description.val.length > SubmitSuggestion.minDescriptionLength) {
+    if (description.val && description.val.length > Prospect.minDescriptionLength) {
       description.valid = true;
     }
 
@@ -59,5 +59,5 @@ export class SubmitSuggestion {
   }
 }
 
-SubmitSuggestion.minNameLength = 3;
-SubmitSuggestion.minDescriptionLength = 10;
+Prospect.minNameLength = 3;
+Prospect.minDescriptionLength = 10;

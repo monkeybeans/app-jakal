@@ -3,6 +3,7 @@ import {
   addSuggestion,
   voteForSuggestion,
   fetchSuggestions,
+  updateProspect,
 } from './suggestions.action';
 
 export {
@@ -10,4 +11,5 @@ export {
   addSuggestion,
   voteForSuggestion,
   fetchSuggestions,
+  updateProspect,
 };

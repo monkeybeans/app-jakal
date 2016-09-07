@@ -1,15 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { FormControl, ControlLabel, HelpBlock, FormGroup, Button } from 'react-bootstrap';
-import { addSuggestion } from '../../actions';
-import { SubmitSuggestion } from '../../models/suggestion';
+import { addSuggestion, updateProspect } from '../../actions';
 
 class AddSuggestion extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { suggestion: new SubmitSuggestion('', '', false) };
-
-    this.submitSuggestion = this.submitSuggestion.bind(this);
+    this.sendProspect = this.sendProspect.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
@@ -18,57 +16,51 @@ class AddSuggestion extends React.Component {
     const name = document.getElementById('suggestion-name').value;
     const description = document.getElementById('suggestion-description').value;
 
-    const subSug = new SubmitSuggestion(name, description, false);
-
-    this.setState({ suggestion: subSug });
+    updateProspect(name, description, false);
   }
 
-  submitSuggestion(event) {
+  sendProspect(event) {
     event.preventDefault();
-    const nameEl = document.getElementById('suggestion-name');
-    const descriptionEl = document.getElementById('suggestion-description');
+    const name = document.getElementById('suggestion-name').value;
+    const description = document.getElementById('suggestion-description').value;
+    const { suggestion: { prospect } } = this.props;
 
-    const name = nameEl.value;
-    const description = descriptionEl.value;
+    updateProspect(name, description, true);
 
-    const subSug = new SubmitSuggestion(name, description, true);
-
-    if (subSug.valid === true) {
-      addSuggestion(name, description);
-      this.setState({ suggestion: new SubmitSuggestion('', '', false) });
-    } else {
-      this.setState({ suggestion: subSug });
+    if (prospect.valid === true) {
+      addSuggestion(prospect);
     }
   }
 
 
   render() {
-    const { suggestion } = this.state;
+    const { suggestion: { prospect } } = this.props;
+
     return (
       <div className="add-suggestion">
-        <form method="POST" action="" onSubmit={this.submitSuggestion}>
+        <form method="POST" action="" onSubmit={this.sendProspect}>
           <FormGroup
-            validationState={suggestion.getValidationState('name')}
+            validationState={prospect.getValidationState('name')}
             controlId="suggestion-name"
           >
             <ControlLabel>Suggestion Name</ControlLabel>
             <FormControl
               id="suggestion-name"
-              value={suggestion.name.val}
+              value={prospect.name.val}
               onChange={this.onChange}
               type="text"
               placeholder="Suggestion name"
             />
-            <HelpBlock>{suggestion.name.touched && suggestion.name.helpText}</HelpBlock>
+            <HelpBlock>{prospect.name.touched && prospect.name.helpText}</HelpBlock>
           </FormGroup>
           <FormGroup
-            validationState={suggestion.getValidationState('description')}
+            validationState={prospect.getValidationState('description')}
             controlId="suggestion-description"
           >
             <ControlLabel htmlFor="suggestion-description">What makes this so great?</ControlLabel>
             <FormControl
               id="suggestion-description"
-              value={suggestion.description.val}
+              value={prospect.description.val}
               onChange={this.onChange}
               componentClass="textarea"
               placeholder="Short description with motivation"
@@ -76,12 +68,12 @@ class AddSuggestion extends React.Component {
               rows="10"
               cols="50"
             />
-            <HelpBlock>{suggestion.description.touched && suggestion.description.helpText}</HelpBlock>
+            <HelpBlock>{prospect.description.touched && prospect.description.helpText}</HelpBlock>
           </FormGroup>
           <Button
             type="submit"
             bsStyle="primary"
-            disabled={!suggestion.name.valid || !suggestion.description.valid}
+            disabled={!prospect.name.valid || !prospect.description.valid}
           >Add your suggestion</Button>
         </form>
       </div>
@@ -89,4 +81,10 @@ class AddSuggestion extends React.Component {
   }
 }
 
-export default AddSuggestion;
+AddSuggestion.propTypes = {
+  suggestion: React.PropTypes.object,
+};
+
+const mapStateToProps = state => ({ suggestion: state.suggestion });
+
+export default connect(mapStateToProps)(AddSuggestion);
