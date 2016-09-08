@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { FormControl, ControlLabel, HelpBlock, FormGroup, Button } from 'react-bootstrap';
 import { addSuggestion, updateProspect } from '../../actions';
+import './add-suggestion.scss';
 
 class AddSuggestion extends React.Component {
   constructor(props) {
@@ -44,6 +45,7 @@ class AddSuggestion extends React.Component {
           <FormGroup
             validationState={prospect.getValidationState('name')}
             controlId="suggestion-name"
+            bsSize="large"
           >
             <ControlLabel>Suggestion Name</ControlLabel>
             <FormControl
@@ -58,6 +60,7 @@ class AddSuggestion extends React.Component {
           <FormGroup
             validationState={prospect.getValidationState('description')}
             controlId="suggestion-description"
+            bsSize="large"
           >
             <ControlLabel htmlFor="suggestion-description">What makes this so great?</ControlLabel>
             <FormControl
@@ -76,6 +79,7 @@ class AddSuggestion extends React.Component {
             type="submit"
             bsStyle="primary"
             disabled={!prospect.name.valid || !prospect.description.valid}
+            bsSize="large"
           >Add your suggestion</Button>
         </form>
       </div>

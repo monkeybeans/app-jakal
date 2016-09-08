@@ -25,7 +25,7 @@ class VotingList extends React.Component {
     if (this.props.status.period !== 'VOTE') return null;
 
     return (
-      <Button onClick={this.voteForThis} bsStyle="primary" value={suggestionId}>Vote</Button>
+      <Button onClick={this.voteForThis} bsStyle="primary" bsSize="lg" value={suggestionId}>Vote</Button>
     );
   }
 
