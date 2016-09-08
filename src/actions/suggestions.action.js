@@ -1,6 +1,7 @@
 import api from '../api';
 import { Suggestion, Prospect } from '../models/suggestion';
 import { dispatch } from '../store';
+import { updateSessionCookie } from '../core/session';
 
 const updateStateSuggestions = suggestions => {
   const action = {
@@ -37,9 +38,16 @@ function addSuggestion(prospect) {
   .catch(e => console.log(`could not add suggestion: ${e}`));
 }
 
+function updateVoteTime() {
+  updateSessionCookie({
+    vote_time: new Date(),
+  });
+}
+
 function voteForSuggestion(suggestionId) {
   api
   .put(`/api/suggestions/${suggestionId}/vote`)
+  .then(updateVoteTime)
   .then(fetchSuggestions)
   .catch(e => console.log(`could not vote for suggestion: ${e}`));
 }

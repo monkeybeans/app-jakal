@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { fetchSuggestions, voteForSuggestion } from '../../actions';
+import { getSession } from '../../core/session';
 import './voting-list.scss';
 
 
@@ -22,10 +23,29 @@ class VotingList extends React.Component {
   }
 
   renderVoteButton(suggestionId) {
-    if (this.props.status.period !== 'VOTE') return null;
+    const votedDate = new Date(getSession().vote_time);
+    const currentDate = new Date();
+    const quarantineMs = 1000 * 60 * 60 * 60 * 24 * 7;
+
+    let votingPossible = true;
+    if (!isNaN(votedDate.getTime()) && (votedDate.getTime() + quarantineMs) > currentDate.getTime()) {
+      votingPossible = false;
+    }
+
+    if (this.props.status.period !== 'VOTE') {
+      votingPossible = false;
+    }
 
     return (
-      <Button onClick={this.voteForThis} bsStyle="primary" bsSize="lg" value={suggestionId}>Vote</Button>
+      <Button
+        disabled={!votingPossible}
+        onClick={this.voteForThis}
+        bsStyle={votingPossible ? 'success' : 'default'}
+        bsSize="lg"
+        value={suggestionId}
+      >
+        Vote
+      </Button>
     );
   }
 
