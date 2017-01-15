@@ -4,15 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "start:dev": "nodemon server.js",
-    "build": "webpack"
+    "serve": "nodemon server.js",
+    "build": "webpack",
+    "start": "npm run build -- -w | npm run serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0",
     "react": "^15.3.1",
     "react-bootstrap": "^0.30.3",
     "react-dom": "^15.3.1",
@@ -32,6 +31,7 @@
     "eslint-plugin-import": "^1.14.0",
     "eslint-plugin-jsx-a11y": "^2.2.0",
     "eslint-plugin-react": "^6.2.0",
+    "express": "^4.14.0",
     "node-sass": "^3.8.0",
     "redux-devtools": "^3.3.1",
     "sass-loader": "^4.0.0",

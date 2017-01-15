@@ -23,7 +23,7 @@ const updateProspect = (name, description, touch) => {
 
 function fetchSuggestions() {
   api
-  .get('/api/suggestions/fresh')
+  .get('/api/v1/suggestions/fresh')
   .then(resp => {
     updateStateSuggestions(resp.map(s => new Suggestion(s)));
   })
@@ -32,7 +32,7 @@ function fetchSuggestions() {
 
 function addSuggestion(prospect) {
   api
-  .post('/api/suggestions', { name: prospect.name.val, description: prospect.description.val })
+  .post('/api/v1/suggestions', { name: prospect.name.val, description: prospect.description.val })
   .then(() => updateProspect('', '', false))
   .then(fetchSuggestions)
   .catch(e => console.log(`could not add suggestion: ${e}`));
@@ -46,7 +46,7 @@ function updateVoteTime() {
 
 function voteForSuggestion(suggestionId) {
   api
-  .put(`/api/suggestions/${suggestionId}/vote`)
+  .put(`/api/v1/suggestions/${suggestionId}/vote`)
   .then(updateVoteTime)
   .then(fetchSuggestions)
   .catch(e => console.log(`could not vote for suggestion: ${e}`));

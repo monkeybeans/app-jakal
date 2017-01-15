@@ -13,7 +13,7 @@ function periodRecieved(period) {
 
 function fetchPeriod() {
   api
-  .get('/api/period')
+  .get('/api/v1/meta/config')
   .then(resp => {
     periodRecieved(periodMapper[resp]);
   })

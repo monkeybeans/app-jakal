@@ -1,0 +1,36 @@
+{
+  "suggestions": [
+    {
+      "id": 2,
+      "name": "apan apansson",
+      "description": "oho hohoh oh oh ",
+      "submitter": null,
+      "submitted": null,
+      "numVotes": 12
+    },
+    {
+      "id": 3,
+      "name": "monkey buisness",
+      "description": "monkey see monkey do",
+      "submitter": null,
+      "submitted": null,
+      "numVotes": 2
+    },
+    {
+      "id": 4,
+      "name": "Banan",
+      "description": "Monkey eat monkey eat\n",
+      "submitter": null,
+      "submitted": null,
+      "numVotes": 1
+    },
+    {
+      "id": 5,
+      "name": "blue banana",
+      "description": "Blue is better than no banana",
+      "submitter": null,
+      "submitted": null,
+      "numVotes": 0
+    },
+  ]
+}
