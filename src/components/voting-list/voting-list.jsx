@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import { fetchSuggestions, voteForSuggestion } from '../../actions';
+import { voteForSuggestion } from '../../actions';
 import { getSession } from '../../core/session';
 import './voting-list.scss';
 
@@ -10,16 +10,7 @@ class VotingList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.voteForThis = this.voteForThis.bind(this);
     this.renderVoteItem = this.renderVoteItem.bind(this);
-  }
-
-  componentWillMount() {
-    fetchSuggestions();
-  }
-
-  voteForThis(event) {
-    voteForSuggestion(event.target.value);
   }
 
   renderVoteButton(suggestionId) {
@@ -32,14 +23,15 @@ class VotingList extends React.Component {
       votingPossible = false;
     }
 
-    if (this.props.status.period !== 'VOTE') {
+    if (this.props.config.period !== 'VOTE') {
       votingPossible = false;
     }
 
+    const onClick = e => voteForSuggestion(e.target.value);
     return (
       <Button
         disabled={!votingPossible}
-        onClick={this.voteForThis}
+        onClick={onClick}
         bsStyle={votingPossible ? 'success' : 'default'}
         bsSize="lg"
         value={suggestionId}
@@ -65,20 +57,20 @@ class VotingList extends React.Component {
     return (
       <div className="vote-list">
         <h2>Current suggestions</h2>
-        { this.props.suggestion.freshSuggestions.map(this.renderVoteItem) }
+        { this.props.dynamics.suggestions.map(this.renderVoteItem) }
       </div>
     );
   }
 }
 
 VotingList.propTypes = {
-  suggestion: React.PropTypes.object,
-  status: React.PropTypes.object,
+  config: React.PropTypes.object, //eslint-disable-line
+  dynamics: React.PropTypes.object, //eslint-disable-line
 };
 
 const mapStateToProps = state => ({
-  suggestion: state.suggestion,
-  status: state.status,
+  config: state.config,
+  dynamics: state.dynamics,
 });
 
 export default connect(mapStateToProps)(VotingList);

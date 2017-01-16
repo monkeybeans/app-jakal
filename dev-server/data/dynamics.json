@@ -6,7 +6,7 @@
       "description": "oho hohoh oh oh ",
       "submitter": null,
       "submitted": null,
-      "numVotes": 12
+      "num_votes": 12
     },
     {
       "id": 3,
@@ -14,7 +14,7 @@
       "description": "monkey see monkey do",
       "submitter": null,
       "submitted": null,
-      "numVotes": 2
+      "num_votes": 2
     },
     {
       "id": 4,
@@ -22,7 +22,7 @@
       "description": "Monkey eat monkey eat\n",
       "submitter": null,
       "submitted": null,
-      "numVotes": 1
+      "num_votes": 1
     },
     {
       "id": 5,
@@ -30,7 +30,7 @@
       "description": "Blue is better than no banana",
       "submitter": null,
       "submitted": null,
-      "numVotes": 0
+      "num_votes": 0
     },
   ]
 }

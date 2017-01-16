@@ -10,7 +10,7 @@ const API = 'http://localhost:8080';
 const ASSETS_PATH = path.join(__dirname, '/web/assets');
 const INDEX_PATH = path.join(__dirname, '/web/index.html');
 
-app.use('/assets', express.static(ASSETS_PATH));
+app.use('/assets', express.static(ASSETS_PATH, { etag: false }));
 
 app.use('/api/v1', (req, res) => {
   const apiUrl = `${API}${req.originalUrl}`;
@@ -21,14 +21,14 @@ app.use('/api/v1', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.sendFile(INDEX_PATH);
+  res.sendFile(INDEX_PATH, { maxAge: 0 });
 });
 
 app.listen(PORT, () => {
   console.log(`Time: ${new Date().toString()}`);
   console.log(`Starting server on port: ${PORT}`);
   console.log(`Go to http://localhost:${PORT} to view application.`);
-  httpRequest(`${API}/ping`, err => {
+  httpRequest(`${API}/ping`, (err) => {
     if (err) {
       throw new Error(`Could not ping api server: ${err}`);
     }

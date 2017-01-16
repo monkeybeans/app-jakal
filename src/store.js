@@ -1,8 +1,8 @@
 import { createStore, combineReducers } from 'redux';
-import { suggestion, status } from './reducers';
+import { config, dynamics, history } from './reducers/meta.reducer';
 
 const devTools = () => window.devToolsExtension && window.devToolsExtension();
-const combinedReducers = combineReducers({ suggestion, status });
+const combinedReducers = combineReducers({ config, dynamics, history });
 const store = createStore(combinedReducers, devTools());
 const dispatch = store.dispatch;
 

@@ -5,11 +5,13 @@ import Header from './components/header';
 import SectionCurrent from './components/section-current';
 import './style/reset.scss';
 import store from './store';
-import { fetchPeriod } from './actions';
+import { updateConfig, updateDynamics, updateHistory } from './actions';
 
 class App extends React.Component {
   componentWillMount() {
-    fetchPeriod();
+    updateConfig();
+    updateDynamics();
+    updateHistory();
   }
 
   render() {

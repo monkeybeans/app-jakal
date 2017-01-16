@@ -1,6 +1,6 @@
 {
   "period":"display",
-  "timeToNewPeriod":7,
-  "elapsedPeriodTime":13,
+  "time_to_new_period":7,
+  "elapsed_period_time":13,
   "lastWinner":null
 }

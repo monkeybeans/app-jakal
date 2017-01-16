@@ -5,14 +5,7 @@ import { addSuggestion, updateProspect } from '../../actions';
 import './add-suggestion.scss';
 
 class AddSuggestion extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.sendProspect = this.sendProspect.bind(this);
-    this.onChange = this.onChange.bind(this);
-  }
-
-  onChange(event) {
+  static onChange(event) {
     event.preventDefault();
     const name = document.getElementById('suggestion-name').value;
     const description = document.getElementById('suggestion-description').value;
@@ -20,52 +13,46 @@ class AddSuggestion extends React.Component {
     updateProspect(name, description, false);
   }
 
-  sendProspect(event) {
+  static sendProspect(event) {
     event.preventDefault();
     const name = document.getElementById('suggestion-name').value;
     const description = document.getElementById('suggestion-description').value;
-    const { suggestion: { prospect } } = this.props;
 
-    updateProspect(name, description, true);
-
-    if (prospect.valid === true) {
-      addSuggestion(prospect);
+    if ('IMPLEMENT_THIS' === true) {
+      addSuggestion({ name, description });
     }
   }
 
-
   render() {
-    if (this.props.status.period !== 'SUGGEST') return null;
-
-    const { suggestion: { prospect } } = this.props;
+    if (this.props.config.period !== 'SUGGEST') return null;
 
     return (
       <div className="add-suggestion">
         <form method="POST" action="" onSubmit={this.sendProspect}>
           <FormGroup
-            validationState={prospect.getValidationState('name')}
+            validationState={'IMPLEMENT_THIS'}
             controlId="suggestion-name"
             bsSize="large"
           >
             <ControlLabel>Suggestion Name</ControlLabel>
             <FormControl
               id="suggestion-name"
-              value={prospect.name.val}
+              value={'IMPLEMENT_THIS'}
               onChange={this.onChange}
               type="text"
               placeholder="Suggestion name"
             />
-            <HelpBlock>{prospect.name.touched && prospect.name.helpText}</HelpBlock>
+            <HelpBlock>{'IMPLEMENT_THIS'}</HelpBlock>
           </FormGroup>
           <FormGroup
-            validationState={prospect.getValidationState('description')}
+            validationState={'IMPLEMENT_THIS'}
             controlId="suggestion-description"
             bsSize="large"
           >
             <ControlLabel htmlFor="suggestion-description">What makes this so great?</ControlLabel>
             <FormControl
               id="suggestion-description"
-              value={prospect.description.val}
+              value={'IMPLEMENT_THIS'}
               onChange={this.onChange}
               componentClass="textarea"
               placeholder="Short description with motivation"
@@ -73,12 +60,12 @@ class AddSuggestion extends React.Component {
               rows="10"
               cols="50"
             />
-            <HelpBlock>{prospect.description.touched && prospect.description.helpText}</HelpBlock>
+            <HelpBlock>{'IMPLEMENT_THIS'}</HelpBlock>
           </FormGroup>
           <Button
             type="submit"
             bsStyle="primary"
-            disabled={!prospect.name.valid || !prospect.description.valid}
+            disabled={'IMPLEMENT_THIS'}
             bsSize="large"
           >Add your suggestion</Button>
         </form>
@@ -88,13 +75,11 @@ class AddSuggestion extends React.Component {
 }
 
 AddSuggestion.propTypes = {
-  suggestion: React.PropTypes.object,
-  status: React.PropTypes.object,
+  config: React.PropTypes.object, //eslint-disable-line
 };
 
 const mapStateToProps = state => ({
-  suggestion: state.suggestion,
-  status: state.status,
+  config: state.config,
 });
 
 export default connect(mapStateToProps)(AddSuggestion);

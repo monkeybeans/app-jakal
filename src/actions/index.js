@@ -1,15 +1,19 @@
-import fetchPeriod from './status.action';
+import actionEnum from './action.enum';
 import {
-  addSuggestion,
+  updateConfig,
+  updateDynamics,
+  updateHistory,
+} from './meta.actions';
+import {
+  submitSuggestion,
   voteForSuggestion,
-  fetchSuggestions,
-  updateProspect,
-} from './suggestions.action';
+} from './suggestion.actions';
 
 export {
-  fetchPeriod,
-  addSuggestion,
+  actionEnum,
+  updateConfig,
+  updateDynamics,
+  updateHistory,
+  submitSuggestion,
   voteForSuggestion,
-  fetchSuggestions,
-  updateProspect,
 };

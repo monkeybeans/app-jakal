@@ -2,7 +2,7 @@ const HTTP_STATUS_OK = 200;
 const HTTP_STATUS_NO_CONTENT = 204;
 const XHR_STATUS_DONE = 4;
 
-const baseUrl = `${location.protocol}//${location.host}`;
+const baseUrl = `${location.protocol}//${location.host}/api/v1/`;
 
 const post = (url, data) => new Promise((res, rej) => {
   const cleanUrl = url.replace(/^\//, '');
