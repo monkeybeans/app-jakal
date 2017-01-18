@@ -43,20 +43,23 @@ class VotingList extends React.Component {
 
   renderVoteItem(suggestion) {
     return (
-      <div className="vote-item" key={suggestion.id}>
+      <div className="vote-item" key={suggestion.id.value}>
         <h2>
-          { suggestion.name } <span className="vote-item__num-votes">{suggestion.numVotes}</span>
+          { suggestion.name.value }
+          <span className="vote-item__num-votes">{suggestion.numVotes.value}</span>
         </h2>
-        <p>{ suggestion.description }</p>
-        { this.renderVoteButton(suggestion.id) }
+        <p>{ suggestion.description.value }</p>
+        { this.renderVoteButton(suggestion.id.value) }
       </div>
     );
   }
 
   render() {
+    const { config } = this.props;
     return (
       <div className="vote-list">
-        <h2>Current suggestions</h2>
+        <h2>Current suggestions.</h2>
+        <p>Current time <b>{config.period}</b> - days left <b>{config.daysToNextPeriod}</b></p>
         { this.props.dynamics.suggestions.map(this.renderVoteItem) }
       </div>
     );

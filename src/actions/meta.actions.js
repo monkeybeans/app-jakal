@@ -1,35 +1,34 @@
 import actionEnum from './action.enum';
 import { fetchConfig, fetchDynamics, fetchHistory } from './api';
-import { dispatch } from '../store';
 
-const dispatchAction = {
-  updateConfig: data => dispatch({
+const a = {
+  updateConfig: data => ({
     type: actionEnum.UPDATE_CONFIG,
     data,
   }),
-  updateDynamics: data => dispatch({
+  updateDynamics: data => ({
     type: actionEnum.UPDATE_DYNAMICS,
     data,
   }),
-  updateHistory: data => dispatch({
+  updateHistory: data => ({
     type: actionEnum.UPDATE_HISTORY,
     data,
   }),
 };
 
-function updateConfig() {
+function updateConfig(dispatch) {
   fetchConfig()
-  .then(data => dispatchAction.updateConfig(data));
+  .then(data => dispatch(a.updateConfig(data)));
 }
 
-function updateDynamics() {
+function updateDynamics(dispatch) {
   fetchDynamics()
-  .then(data => dispatchAction.updateDynamics(data));
+  .then(data => dispatch(a.updateDynamics(data)));
 }
 
-function updateHistory() {
+function updateHistory(dispatch) {
   fetchHistory()
-  .then(data => dispatchAction.updateConfig(data));
+  .then(data => dispatch(a.updateConfig(data)));
 }
 
 export {
