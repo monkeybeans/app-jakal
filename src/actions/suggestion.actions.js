@@ -1,8 +1,7 @@
-import { actionEnum } from './action.enum';
+import actionEnum from './action.enum';
 import { sendSuggestion, sendSuggestionVote } from './api';
-// import { dispatch } from '../store';
+import { dispatch } from '../store';
 
-const dispatch = () => {};
 const dispatchAction = {
   submit: data => dispatch({
     type: actionEnum.UPDATE_DYNAMICS,

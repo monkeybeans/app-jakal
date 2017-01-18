@@ -1,4 +1,4 @@
-import { actionEnum } from '../actions';
+import actionEnum from '../actions/action.enum';
 import { ConfigState, DynamicsState, HistoryState } from './states';
 
 export function config(state = new ConfigState(), action) {

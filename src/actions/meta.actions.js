@@ -1,8 +1,7 @@
 import actionEnum from './action.enum';
 import { fetchConfig, fetchDynamics, fetchHistory } from './api';
-// import { dispatch } from '../store';
+import { dispatch } from '../store';
 
-const dispatch = () => {};
 const dispatchAction = {
   updateConfig: data => dispatch({
     type: actionEnum.UPDATE_CONFIG,
