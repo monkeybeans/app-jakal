@@ -12,7 +12,7 @@ export default class ConfigState {
     if (typeof props === 'object') {
       this.period = props.period && periodMapper(props.period);
       this.daysToNextPeriod = props.days_to_next_period;
-      this.daysElapsedPeriod = props.days_elapsed_period;
+      this.daysElapsedPeriod = props.elapsed_period_days;
     }
   }
 }

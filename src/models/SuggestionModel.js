@@ -3,11 +3,19 @@ export default class SuggestionModel {
     this.validate(props, touch);
   }
 
+  inValidProps() {
+    return Object.keys(this).filter(k => !k.valid);
+  }
+
+  isValid() {
+    return Object.keys(this).every(k => k.valid);
+  }
+
   validate(props, touch) {
     const validateConfig = o =>
     ['validator', 'value', 'touched', 'valid', 'error'].every(p => o[p] !== undefined);
 
-    Object.keys(props).forEach(k => {
+    Object.keys(props).forEach((k) => {
       const propValue = props[k];
       const config = SuggestionModel.CONFIG[k];
       if (config) {
