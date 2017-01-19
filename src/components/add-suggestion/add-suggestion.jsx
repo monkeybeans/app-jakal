@@ -8,20 +8,8 @@ import InputName from './input-name';
 import InputDescription from './input-description';
 
 class AddSuggestion extends React.Component {
-  static updateSuggestion(field, value, suggestion, touch) {
-    const suggestionProp = Object.keys(suggestion)
-    .reduce((a, c) => {
-      const r = Object.assign({}, a);
-      if (c !== field) {
-        r[c] = suggestion[c].value;
-      }
-
-      return r;
-    }, {});
-
-    suggestionProp[field] = value;
-
-    return new SuggestionModel(suggestionProp, touch);
+  static updatedSuggestion(field, value, suggestion, touch) {
+    return new SuggestionModel({ [field]: value }, touch, suggestion);
   }
 
   constructor(props) {
@@ -38,7 +26,8 @@ class AddSuggestion extends React.Component {
 
   onUpdateFactory(field, touch) {
     return (e) => {
-      const suggestion = AddSuggestion.updateSuggestion(field, e.target.value, this.state.suggestion, touch);
+      const suggestion = AddSuggestion.updatedSuggestion(field, e.target.value, this.state.suggestion, touch);
+
       this.setState({ suggestion });
     };
   }

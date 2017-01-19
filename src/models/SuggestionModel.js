@@ -1,6 +1,36 @@
 export default class SuggestionModel {
-  constructor(props = {}, touch = false) {
-    this.validate(props, touch);
+  constructor(props = {}, touch = false, inheritance) {
+    const validPropKeys = Object.keys(SuggestionModel.CONFIG);
+    const invalidPropKeys = Object.keys(props).filter(k => validPropKeys.indexOf(k) === -1);
+    if (invalidPropKeys.length > 0) { throw new Error(`Invalid properties: ${invalidPropKeys.join(',')}`); }
+
+    this.setDafaultValues();
+    this.inheritFromInstance(inheritance);
+    this.addProps(props);
+    this.touchNew(touch, props);
+    this.validate(touch);
+  }
+
+  touchNew(touch, props) {
+    Object.keys(props).forEach((k) => {
+      this[k].touched = touch;
+    });
+  }
+
+  setDafaultValues() {
+    Object.keys(SuggestionModel.CONFIG).forEach((k) => {
+      this[k] = {};
+      this[k].value = SuggestionModel.CONFIG[k].defaultValue;
+      this[k].touched = SuggestionModel.CONFIG[k].touched;
+    });
+  }
+
+  inheritFromInstance(instance) {
+    if (instance) {
+      if (!(instance instanceof SuggestionModel)) { throw new Error('Tried to inherit from other instance than SuggestionModel!'); }
+
+      Object.assign(this, instance);
+    }
   }
 
   inValidProps() {
@@ -20,26 +50,25 @@ export default class SuggestionModel {
     .reduce((a, c) => Object.assign({}, a, { [c]: this[c].value }), {});
   }
 
-  validate(props, touch) {
-    const validateConfiguration = o =>
-    ['validator', 'value', 'touched', 'valid', 'error'].every(p => o[p] !== undefined);
-
+  addProps(props) {
+    const unknowns = Object.keys(props).filter(p => !SuggestionModel.CONFIG[p]);
+    if (unknowns.length > 0) { throw new Error(`Unkonwn props: ${unknowns.join(',')}`); }
 
     Object.keys(SuggestionModel.CONFIG).forEach((k) => {
-      const unknowns = Object.keys(props).filter(p => !SuggestionModel.CONFIG[p]);
-      if (unknowns.length > 0) { throw new Error(`Unkonwn props: ${unknowns.join(',')}`); }
+      if (props[k] !== undefined) {
+        this[k].value = props[k];
+      }
+    });
+  }
 
-      const propValue = props[k];
+  validate() {
+    Object.keys(SuggestionModel.CONFIG).forEach((k) => {
       const config = SuggestionModel.CONFIG[k];
-      if (!validateConfiguration(config)) { throw new Error(`Property '${k}' missing fields!`); }
-      const valid = config.validator(propValue);
+      const value = this[k].value;
+      const valid = config.validator(value);
 
-      this[k] = {
-        value: propValue || SuggestionModel.CONFIG[k].value,
-        touched: touch && propValue !== undefined,
-        valid,
-        error: valid ? '' : config.error,
-      };
+      this[k].valie = valid;
+      this[k].error = valid ? '' : config.error;
     });
   }
 }
@@ -48,44 +77,52 @@ export default class SuggestionModel {
 SuggestionModel.CONFIG = {
   id: {
     validator: val => typeof val === 'number' && val > 0,
-    value: 0,
+    defaultValue: 0,
     touched: false,
     valid: false,
     error: 'Value must be more a positive number',
   },
   name: {
     validator: val => typeof val === 'string' && val.length > 3,
-    value: '',
+    defaultValue: '',
     touched: false,
     valid: false,
     error: 'Name must be more than 3 characters long.',
   },
   description: {
     validator: val => typeof val === 'string' && val.length > 10,
-    value: '',
+    defaultValue: '',
     touched: false,
     valid: false,
     error: 'Value must be more than 10 characters long.',
   },
   numVotes: {
     validator: val => typeof val === 'number' && val >= 0,
-    value: 0,
+    defaultValue: 0,
     touched: false,
     valid: false,
     error: 'Vote must be a number.',
   },
   submitted: {
     validator: val => typeof val === 'string' && val.length > 0,
-    value: 0,
+    defaultValue: 0,
     touched: false,
     valid: false,
     error: 'Submitted must be a date.',
   },
   submitter: {
     validator: val => typeof val === 'string' && val > 0,
-    value: 0,
+    defaultValue: 0,
     touched: false,
     valid: false,
     error: 'Submitter must have a name.',
   },
 };
+
+const validateConfiguration = o =>
+['validator', 'defaultValue', 'touched', 'valid', 'error'].every(p => o[p] !== undefined);
+
+Object.keys(SuggestionModel.CONFIG).forEach((k) => {
+  const config = SuggestionModel.CONFIG[k];
+  if (!validateConfiguration(config)) { throw new Error(`Property '${k}' is missing fields!`); }
+});
