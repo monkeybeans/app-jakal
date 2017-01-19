@@ -1,4 +1,4 @@
-import SuggestionModel from '../../models/SuggestionModel';
+import { SuggestionModel } from '../../models';
 
 export default class DynamicsState {
   constructor(props = {}) {

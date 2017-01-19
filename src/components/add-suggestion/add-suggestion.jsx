@@ -1,71 +1,108 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FormControl, ControlLabel, HelpBlock, FormGroup, Button } from 'react-bootstrap';
-import { addSuggestion, updateProspect } from '../../actions';
+import { Button } from 'react-bootstrap';
+import { submitSuggestion } from '../../actions';
+import { SuggestionModel, PeriodEnum } from '../../models';
 import './add-suggestion.scss';
+import InputName from './input-name';
+import InputDescription from './input-description';
 
 class AddSuggestion extends React.Component {
-  static onChange(event) {
-    event.preventDefault();
-    const name = document.getElementById('suggestion-name').value;
-    const description = document.getElementById('suggestion-description').value;
+  static updateSuggestion(field, value, suggestion, touch) {
+    const suggestionProp = Object.keys(suggestion)
+    .reduce((a, c) => {
+      const r = Object.assign({}, a);
+      if (c !== field) {
+        r[c] = suggestion[c].value;
+      }
 
-    updateProspect(name, description, false);
+      return r;
+    }, {});
+
+    suggestionProp[field] = value;
+
+    return new SuggestionModel(suggestionProp, touch);
   }
 
-  static sendProspect(event) {
-    event.preventDefault();
-    const name = document.getElementById('suggestion-name').value;
-    const description = document.getElementById('suggestion-description').value;
+  constructor(props) {
+    super(props);
 
-    if ('IMPLEMENT_THIS' === true) {
-      addSuggestion({ name, description });
+    this.state = {
+      suggestion: new SuggestionModel(),
+    };
+
+    this.onUpdateFactory = this.onUpdateFactory.bind(this);
+    this.sendProspect = this.sendProspect.bind(this);
+    this.helpText = this.helpText.bind(this);
+  }
+
+  onUpdateFactory(field, touch) {
+    return (e) => {
+      const suggestion = AddSuggestion.updateSuggestion(field, e.target.value, this.state.suggestion, touch);
+      this.setState({ suggestion });
+    };
+  }
+
+  sendProspect(event) {
+    event.preventDefault();
+    const { suggestion: s } = this.state;
+
+    s.touchAll();
+
+    const submitEligible = !s.name.error && !s.description.error;
+
+    if (submitEligible) {
+      submitSuggestion(this.props.dispatch, s);
+      this.setState({ suggestion: new SuggestionModel() });
+    } else {
+      this.setState({ suggestion: s });
     }
   }
 
+  validationState(suggestionField) {
+    const field = this.state.suggestion[suggestionField];
+    let state = null;
+    if (!field.error) {
+      state = 'success';
+    } else if (field.touched && field.error) {
+      state = 'error';
+    }
+
+    return state;
+  }
+
+  helpText(suggestionField) {
+    const field = this.state.suggestion[suggestionField];
+    return field.touched && field.error ? field.error : '';
+  }
+
   render() {
-    if (this.props.config.period !== 'SUGGEST') return null;
+    const { config } = this.props;
+    const { suggestion: s } = this.state;
+
+    if (config.period !== PeriodEnum.SUGGEST) return null;
 
     return (
       <div className="add-suggestion">
         <form method="POST" action="" onSubmit={this.sendProspect}>
-          <FormGroup
-            validationState={'IMPLEMENT_THIS'}
-            controlId="suggestion-name"
-            bsSize="large"
-          >
-            <ControlLabel>Suggestion Name</ControlLabel>
-            <FormControl
-              id="suggestion-name"
-              value={'IMPLEMENT_THIS'}
-              onChange={this.onChange}
-              type="text"
-              placeholder="Suggestion name"
-            />
-            <HelpBlock>{'IMPLEMENT_THIS'}</HelpBlock>
-          </FormGroup>
-          <FormGroup
-            validationState={'IMPLEMENT_THIS'}
-            controlId="suggestion-description"
-            bsSize="large"
-          >
-            <ControlLabel htmlFor="suggestion-description">What makes this so great?</ControlLabel>
-            <FormControl
-              id="suggestion-description"
-              value={'IMPLEMENT_THIS'}
-              onChange={this.onChange}
-              componentClass="textarea"
-              placeholder="Short description with motivation"
-              name="newSuggestionSummary"
-              rows="10"
-              cols="50"
-            />
-            <HelpBlock>{'IMPLEMENT_THIS'}</HelpBlock>
-          </FormGroup>
+          <InputName
+            onChange={this.onUpdateFactory('name', false)}
+            onBlur={this.onUpdateFactory('name', true)}
+            value={s.name.value}
+            helpText={this.helpText('name')}
+            validationState={this.validationState('name')}
+          />
+          <InputDescription
+            onChange={this.onUpdateFactory('description', false)}
+            onBlur={this.onUpdateFactory('description', true)}
+            value={s.description.value}
+            helpText={this.helpText('description')}
+            validationState={this.validationState('description')}
+          />
+
           <Button
             type="submit"
             bsStyle="primary"
-            disabled={'IMPLEMENT_THIS'}
             bsSize="large"
           >Add your suggestion</Button>
         </form>
@@ -76,6 +113,7 @@ class AddSuggestion extends React.Component {
 
 AddSuggestion.propTypes = {
   config: React.PropTypes.object, //eslint-disable-line
+  dispatch: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

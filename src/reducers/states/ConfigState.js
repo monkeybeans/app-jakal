@@ -1,8 +1,10 @@
+import { PeriodEnum } from '../../models';
+
 function periodMapper(period) {
   switch (period.toLowerCase()) {
-    case 'suggest': return period.toUpperCase();
-    case 'vote': return period.toUpperCase();
-    case 'display': return period.toUpperCase();
+    case 'suggest': return PeriodEnum.SUGGEST;
+    case 'vote': return PeriodEnum.VOTE;
+    case 'display': return PeriodEnum.DISPLAY;
     default: throw new Error(`unknon period type: ${period}`);
   }
 }

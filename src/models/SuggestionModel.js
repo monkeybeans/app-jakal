@@ -1,5 +1,5 @@
 export default class SuggestionModel {
-  constructor(props, touch) {
+  constructor(props = {}, touch = false) {
     this.validate(props, touch);
   }
 
@@ -11,25 +11,30 @@ export default class SuggestionModel {
     return Object.keys(this).every(k => k.valid);
   }
 
+  touchAll() {
+    Object.keys(this).forEach((k) => { this[k].touched = true; });
+  }
+
   validate(props, touch) {
-    const validateConfig = o =>
+    const validateConfiguration = o =>
     ['validator', 'value', 'touched', 'valid', 'error'].every(p => o[p] !== undefined);
 
-    Object.keys(props).forEach((k) => {
+
+    Object.keys(SuggestionModel.CONFIG).forEach((k) => {
+      const unknowns = Object.keys(props).filter(p => !SuggestionModel.CONFIG[p]);
+      if (unknowns.length > 0) { throw new Error(`Unkonwn props: ${unknowns.join(',')}`); }
+
       const propValue = props[k];
       const config = SuggestionModel.CONFIG[k];
-      if (config) {
-        if (!validateConfig(config)) { throw new Error(`Property '${k}' missing fields!`); }
-        const valid = config.validator(propValue);
-        this[k] = {
-          value: propValue,
-          touched: !!touch,
-          valid,
-          error: valid ? null : config.error,
-        };
-      } else {
-        console.error(`Recieved unknonw prop: ${k}`); // eslint-disable-line no-console
-      }
+      if (!validateConfiguration(config)) { throw new Error(`Property '${k}' missing fields!`); }
+      const valid = config.validator(propValue);
+
+      this[k] = {
+        value: propValue || SuggestionModel.CONFIG[k].value,
+        touched: touch && propValue !== undefined,
+        valid,
+        error: valid ? '' : config.error,
+      };
     });
   }
 }
@@ -52,7 +57,7 @@ SuggestionModel.CONFIG = {
   },
   description: {
     validator: val => typeof val === 'string' && val.length > 10,
-    value: 0,
+    value: '',
     touched: false,
     valid: false,
     error: 'Value must be more than 10 characters long.',

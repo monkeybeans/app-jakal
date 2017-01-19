@@ -28,7 +28,7 @@ function updateDynamics(dispatch) {
 
 function updateHistory(dispatch) {
   fetchHistory()
-  .then(data => dispatch(a.updateConfig(data)));
+  .then(data => dispatch(a.updateHistory(data)));
 }
 
 export {
