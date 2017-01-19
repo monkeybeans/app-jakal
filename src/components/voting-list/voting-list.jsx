@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { voteForSuggestion } from '../../actions';
 import { getSession } from '../../core/session';
+import { PeriodEnum } from '../../models';
 import './voting-list.scss';
 
 
@@ -18,14 +19,15 @@ class VotingList extends React.Component {
     const currentDate = new Date();
     const quarantineMs = 1000 * 60 * 60 * 60 * 24 * 7;
 
+    if (this.props.config.period !== PeriodEnum.VOTE) {
+      return null;
+    }
+
     let votingPossible = true;
     if (!isNaN(votedDate.getTime()) && (votedDate.getTime() + quarantineMs) > currentDate.getTime()) {
       votingPossible = false;
     }
 
-    if (this.props.config.period !== 'VOTE') {
-      votingPossible = false;
-    }
 
     const onClick = e => voteForSuggestion(e.target.value);
     return (
@@ -42,11 +44,13 @@ class VotingList extends React.Component {
   }
 
   renderVoteItem(suggestion) {
+    const { config } = this.props;
+    const numVotesElem = <span className="vote-item__num-votes">{suggestion.numVotes.value}</span>;
     return (
       <div className="vote-item" key={suggestion.id.value}>
         <h2>
           { suggestion.name.value }
-          <span className="vote-item__num-votes">{suggestion.numVotes.value}</span>
+          { config.period === PeriodEnum.DISPLAY ? numVotesElem : null }
         </h2>
         <p>{ suggestion.description.value }</p>
         { this.renderVoteButton(suggestion.id.value) }
