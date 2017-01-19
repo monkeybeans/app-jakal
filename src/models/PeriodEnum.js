@@ -5,7 +5,7 @@ const periodEnum =
   'DISPLAY',
 ]
 .reduce(
-  (a, c, i) => Object.assign({}, a, { [c]: i }), {},
+  (a, c) => Object.assign({}, a, { [c]: c }), {},
 );
 
 export default periodEnum;

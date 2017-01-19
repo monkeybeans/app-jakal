@@ -1,7 +1,7 @@
 import api from './api-lib';
 
 function sendSuggestion(suggestion) {
-  return api.post('/suggestions', suggestion)
+  return api.post('/suggestions', suggestion.mapForApi())
   .then(resp => resp)
   .catch(e => console.error(e) || {}); // eslint-disable-line no-console
 }

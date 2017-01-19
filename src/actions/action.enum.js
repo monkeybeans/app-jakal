@@ -5,7 +5,7 @@ const actionEnum =
   'UPDATE_HISTORY',
 ]
 .reduce(
-  (a, c, i) => Object.assign({}, a, { [c]: i }), {},
+  (a, c) => Object.assign({}, a, { [c]: c }), {},
 );
 
 export default actionEnum;

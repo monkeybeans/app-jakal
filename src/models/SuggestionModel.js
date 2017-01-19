@@ -15,6 +15,11 @@ export default class SuggestionModel {
     Object.keys(this).forEach((k) => { this[k].touched = true; });
   }
 
+  mapForApi() {
+    return ['name', 'description']
+    .reduce((a, c) => Object.assign({}, a, { [c]: this[c].value }), {});
+  }
+
   validate(props, touch) {
     const validateConfiguration = o =>
     ['validator', 'value', 'touched', 'valid', 'error'].every(p => o[p] !== undefined);
