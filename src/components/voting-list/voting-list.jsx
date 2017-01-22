@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { voteForSuggestion } from '../../actions';
-import { getSession } from '../../core/session';
 import { PeriodEnum } from '../../models';
 import './voting-list.scss';
 
@@ -15,26 +14,15 @@ class VotingList extends React.Component {
   }
 
   renderVoteButton(suggestionId) {
-    const votedDate = new Date(getSession().vote_time);
-    const currentDate = new Date();
-    const quarantineMs = 1000 * 60 * 60 * 60 * 24 * 7;
+    const { config } = this.props;
+    if (config.period !== PeriodEnum.VOTE) { return null; }
 
-    if (this.props.config.period !== PeriodEnum.VOTE) {
-      return null;
-    }
-
-    let votingPossible = true;
-    if (!isNaN(votedDate.getTime()) && (votedDate.getTime() + quarantineMs) > currentDate.getTime()) {
-      votingPossible = false;
-    }
-
-
-    const onClick = e => voteForSuggestion(e.target.value);
+    const onClick = e => voteForSuggestion(this.props.dispatch, e.target.value);
     return (
       <Button
-        disabled={!votingPossible}
+        disabled={!config.votingAllowed}
         onClick={onClick}
-        bsStyle={votingPossible ? 'success' : 'default'}
+        bsStyle={config.votingAllowed ? 'success' : 'default'}
         bsSize="lg"
         value={suggestionId}
       >
@@ -73,6 +61,7 @@ class VotingList extends React.Component {
 VotingList.propTypes = {
   config: React.PropTypes.object, //eslint-disable-line
   dynamics: React.PropTypes.object, //eslint-disable-line
+  dispatch: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

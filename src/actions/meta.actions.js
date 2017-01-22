@@ -18,17 +18,20 @@ const a = {
 
 function updateConfig(dispatch) {
   fetchConfig()
-  .then(data => dispatch(a.updateConfig(data)));
+  .then(data => dispatch(a.updateConfig(data)))
+  .catch((e) => { throw e; });
 }
 
 function updateDynamics(dispatch) {
   fetchDynamics()
-  .then(data => dispatch(a.updateDynamics(data)));
+  .then(data => dispatch(a.updateDynamics(data)))
+  .catch((e) => { throw e; });
 }
 
 function updateHistory(dispatch) {
   fetchHistory()
-  .then(data => dispatch(a.updateHistory(data)));
+  .then(data => dispatch(a.updateHistory(data)))
+  .catch((e) => { throw e; });
 }
 
 export {

@@ -1,14 +1,19 @@
 import actionEnum from './action.enum';
 import { sendSuggestion, sendSuggestionVote } from './api';
+import { setCookieValue } from '../core/store-config';
 
 const a = {
   submit: data => ({
     type: actionEnum.UPDATE_DYNAMICS,
     data,
   }),
-  vote: data => ({
-    type: actionEnum.UPDATE_DYNAMICS,
+  voteAdded: data => ({
+    type: actionEnum.VOTING_DONE,
     data,
+  }),
+  toggleVotingRight: hasRight => ({
+    type: actionEnum.TOGGLE_VOTING_RIGHT,
+    hasRight,
   }),
 };
 
@@ -18,8 +23,17 @@ function submitSuggestion(dispatch, suggestion) {
 }
 
 function voteForSuggestion(dispatch, id) {
+  dispatch(a.toggleVotingRight(false));
+
   sendSuggestionVote(id)
-  .then(data => dispatch(a.vote(data)));
+  .then((data) => {
+    setCookieValue('voting_done', true, 14);
+    dispatch(a.voteAdded(data));
+  })
+  .catch((e) => {
+    dispatch(a.toggleVotingRight(true));
+    throw e;
+  });
 }
 
 export {
