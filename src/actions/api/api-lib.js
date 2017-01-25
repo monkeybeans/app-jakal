@@ -1,6 +1,7 @@
 const HTTP_STATUS_OK = 200;
 const HTTP_STATUS_NO_CONTENT = 204;
 const XHR_STATUS_DONE = 4;
+const DEFAULT_TIMEOUT_MS = 6000;
 
 const baseUrl = `${location.protocol}//${location.host}/api/v1`;
 
@@ -9,6 +10,10 @@ const post = (url, data) => new Promise((res, rej) => {
   const xhr = new XMLHttpRequest();
 
   xhr.open('POST', `${baseUrl}/${cleanUrl}`);
+
+  xhr.timeout = DEFAULT_TIMEOUT_MS;
+  xhr.ontimeout = e => rej(e);
+
   xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
 
   xhr.send(JSON.stringify(data));
@@ -35,6 +40,10 @@ const put = (url, data) => new Promise((res, rej) => {
   const xhr = new XMLHttpRequest();
 
   xhr.open('PUT', `${baseUrl}/${cleanUrl}`);
+
+  xhr.timeout = DEFAULT_TIMEOUT_MS;
+  xhr.ontimeout = e => rej(e);
+
   xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
 
   xhr.send(JSON.stringify(data));
@@ -64,6 +73,10 @@ const get = (url, query) => new Promise((res, rej) => {
 
   const xhr = new XMLHttpRequest();
   xhr.open('GET', `${baseUrl}/${cleanUrl}?${queryString}`);
+
+  xhr.timeout = DEFAULT_TIMEOUT_MS;
+  xhr.ontimeout = e => rej(e);
+
   xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
 
   xhr.send();
