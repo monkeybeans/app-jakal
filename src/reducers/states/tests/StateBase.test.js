@@ -1,22 +1,13 @@
 import test from 'ava';
 import StateBase from '../StateBase';
 
-let base;
-
-test.before(() => {
-  const TEMPLATE = {
-    propTranslated: 'prop_translated',
-    propFuncTranslated: function input_value(v) { return v; },
-  };
-
-  base = new StateBase({}, null, TEMPLATE);
-});
-
-test.after(() => {
-  base = null;
-});
+const TEMPLATE = {
+  propTranslated: 'prop_translated',
+  propFuncTranslated: function input_value(v) { return v; },
+};
 
 test('does not allow extra props', (t) => {
+  base = new StateBase({ prop_translated: 'apa', input_value: 'banan' }, null, TEMPLATE);
   t.fail();
 });
 
