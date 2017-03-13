@@ -2,12 +2,13 @@
   "name": "app-jakal",
   "version": "1.0.0",
   "description": "",
+  "repository": "",
   "main": "index.js",
   "scripts": {
     "serve": "nodemon server.js",
     "build": "webpack",
     "start": "npm run build -- -w & npm run serve",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava"
   },
   "author": "monkeybean",
   "license": "ISC",
@@ -19,6 +20,7 @@
     "redux": "^3.6.0"
   },
   "devDependencies": {
+    "ava": "^0.17.0",
     "babel-core": "^6.21.0",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",
