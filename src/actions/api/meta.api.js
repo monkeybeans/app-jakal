@@ -1,20 +1,21 @@
 import api from './api-lib';
+import endpointMapping from './endpoints';
 
 function fetchConfig() {
-  return api.get('/meta/config')
-  .then(resp => resp)
+  return api.get(endpointMapping.META_CONFIG)
+  .then(({ data }) => data)
   .catch((e) => { throw e; });
 }
 
 function fetchDynamics() {
-  return api.get('/meta/dynamics')
-  .then(resp => resp)
+  return api.get(endpointMapping.META_DYNAMICS)
+  .then(({ data }) => data)
   .catch((e) => { throw e; });
 }
 
 function fetchHistory() {
-  return api.get('/meta/history')
-  .then(resp => resp)
+  return api.get(endpointMapping.META_HISTORY)
+  .then(({ data }) => data)
   .catch((e) => { throw e; });
 }
 

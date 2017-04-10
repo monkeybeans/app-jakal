@@ -1,5 +1,5 @@
 import test from 'ava';
-import StateBase from '../StateBase';
+import StateBase from '../../src/reducers/states/StateBase';
 
 const TEMPLATE = {
   propTranslated: 'prop_translated',

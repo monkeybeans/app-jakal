@@ -1,102 +1,72 @@
+import api from 'superagent';
+
+const ORIGIN = window.location.origin !== null ? window.location.origin : 'http://dev.null';
 const HTTP_STATUS_OK = 200;
-const HTTP_STATUS_NO_CONTENT = 204;
-const XHR_STATUS_DONE = 4;
-const DEFAULT_TIMEOUT_MS = 6000;
+const HTTP_STATUS_PARTIAL_CONTENT = 206;
 
-const baseUrl = `${location.protocol}//${location.host}/api/v1`;
 
-const post = (url, data) => new Promise((res, rej) => {
-  const cleanUrl = url.replace(/^\//, '');
-  const xhr = new XMLHttpRequest();
+const isNumberWithin = number => (min, max) => number <= max && number >= min;
 
-  xhr.open('POST', `${baseUrl}/${cleanUrl}`);
+const get = (url, query) => new Promise((resolve, reject) => {
+  api
+  .get(`${ORIGIN}/${url}`)
+  .query(query)
+  .set('Accept', 'application/json; utf-8')
+  .end((error, response = {}) => {
+    const status = response.status;
 
-  xhr.timeout = DEFAULT_TIMEOUT_MS;
-  xhr.ontimeout = e => rej(e);
-
-  xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-
-  xhr.send(JSON.stringify(data));
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState === XHR_STATUS_DONE) {
-      if (HTTP_STATUS_OK <= xhr.status && xhr.status <= HTTP_STATUS_NO_CONTENT) {
-        let body = xhr.response;
-        try {
-          body = JSON.parse(body);
-        } catch (e) {
-          console.log(`${cleanUrl} responded with non JSON, using raw. `);
-        }
-
-        res(body, xhr.status);
-      } else {
-        rej(`Could not perform the request, status: ${xhr.status}`);
-      }
+    if (error || !isNumberWithin(status)(HTTP_STATUS_OK, HTTP_STATUS_PARTIAL_CONTENT)) {
+      reject(error);
+    } else {
+      const data = response.body;
+      resolve({
+        status,
+        data,
+      });
     }
-  };
+  });
 });
 
-const put = (url, data) => new Promise((res, rej) => {
-  const cleanUrl = url.replace(/^\//, '');
-  const xhr = new XMLHttpRequest();
+const post = (url, data) => new Promise((resolve, reject) => {
+  api
+  .post(`${ORIGIN}/${url}`)
+  .send(data)
+  .set('Accept', 'application/json; utf-8')
+  .set('Content-Type', 'application/json; utf-8')
+  .end((error, response = {}) => {
+    const status = response && response.status;
 
-  xhr.open('PUT', `${baseUrl}/${cleanUrl}`);
-
-  xhr.timeout = DEFAULT_TIMEOUT_MS;
-  xhr.ontimeout = e => rej(e);
-
-  xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-
-  xhr.send(JSON.stringify(data));
-
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState === XHR_STATUS_DONE) {
-      if (HTTP_STATUS_OK <= xhr.status && xhr.status <= HTTP_STATUS_NO_CONTENT) {
-        let body = xhr.response;
-        try {
-          body = JSON.parse(body);
-        } catch (e) {
-          console.log(`${cleanUrl} responded with non JSON, using raw. `);
-        }
-
-        res(body, xhr.status);
-      } else {
-        rej(`Could not perform the request, status: ${xhr.status}`);
-      }
+    if (error || !isNumberWithin(status)(HTTP_STATUS_OK, HTTP_STATUS_PARTIAL_CONTENT)) {
+      reject(error);
+    } else {
+      const body = response.body;
+      resolve({
+        status,
+        data: body,
+      });
     }
-  };
+  });
 });
 
-const get = (url, query) => new Promise((res, rej) => {
-  const cleanUrl = url.replace(/^\//, '');
-  const queryString = query && typeof query === 'object' ?
-    Object.keys(query).map(k => `${k}=${query[k]}`).join('&') : query || '';
+const put = (url, data) => new Promise((resolve, reject) => {
+  api
+  .put(`${ORIGIN}/${url}`)
+  .send(data)
+  .set('Accept', 'application/json; utf-8')
+  .set('Content-Type', 'application/json; utf-8')
+  .end((error, response = {}) => {
+    const status = response.status;
 
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', `${baseUrl}/${cleanUrl}?${queryString}`);
-
-  xhr.timeout = DEFAULT_TIMEOUT_MS;
-  xhr.ontimeout = e => rej(e);
-
-  xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-
-  xhr.send();
-
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState === XHR_STATUS_DONE) {
-      if (HTTP_STATUS_OK <= xhr.status && xhr.status <= HTTP_STATUS_NO_CONTENT) {
-        let body = xhr.response;
-        try {
-          body = JSON.parse(body);
-        } catch (e) {
-          console.log(`${cleanUrl} responded with non JSON, using raw. `);
-        }
-
-        res(body, xhr.status);
-      } else {
-        rej('Could not perform the request.');
-      }
+    if (error || !isNumberWithin(status)(HTTP_STATUS_OK, HTTP_STATUS_PARTIAL_CONTENT)) {
+      reject(error);
+    } else {
+      const body = response.body;
+      resolve({
+        status,
+        data: body,
+      });
     }
-  };
+  });
 });
 
 export default {

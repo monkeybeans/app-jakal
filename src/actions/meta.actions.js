@@ -17,19 +17,19 @@ const a = {
 };
 
 function updateConfig(dispatch) {
-  fetchConfig()
+  return fetchConfig()
   .then(data => dispatch(a.updateConfig(data)))
   .catch((e) => { throw e; });
 }
 
 function updateDynamics(dispatch) {
-  fetchDynamics()
+  return fetchDynamics()
   .then(data => dispatch(a.updateDynamics(data)))
   .catch((e) => { throw e; });
 }
 
 function updateHistory(dispatch) {
-  fetchHistory()
+  return fetchHistory()
   .then(data => dispatch(a.updateHistory(data)))
   .catch((e) => { throw e; });
 }

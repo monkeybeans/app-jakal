@@ -18,14 +18,14 @@ const a = {
 };
 
 function submitSuggestion(dispatch, suggestion) {
-  sendSuggestion(suggestion)
+  return sendSuggestion(suggestion)
   .then(data => dispatch(a.submit(data)));
 }
 
 function voteForSuggestion(dispatch, id) {
   dispatch(a.toggleVotingRight(false));
 
-  sendSuggestionVote(id)
+  return sendSuggestionVote(id)
   .then((data) => {
     setCookieValue('voting_done', true, 14);
     dispatch(a.voteAdded(data));

@@ -5,6 +5,7 @@
     "browser": true,
   },
   "rules": {
-    "max-len": [2, 160, 2]
+    "max-len": [2, 160, 2],
+    "import/no-extraneous-dependencies": [0]
   }
 }
