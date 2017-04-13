@@ -1,6 +1,6 @@
 {
   "period":"vote",
-  "time_to_new_period":7,
+  "days_to_next_period":7,
   "elapsedPeriodTime":13,
   "last_winner":null
 }

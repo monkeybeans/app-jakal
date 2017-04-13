@@ -36,7 +36,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'web'), // static content
     watchContentBase: false,
-    publicPath: '/assets', // bundle file path
+    publicPath: '/dist', // bundle file path
     compress: true,
     port: 9000,
     proxy: {

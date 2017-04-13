@@ -37,6 +37,7 @@ function voteForSuggestion(dispatch, id) {
 }
 
 export {
+  a as action,
   submitSuggestion,
   voteForSuggestion,
 };

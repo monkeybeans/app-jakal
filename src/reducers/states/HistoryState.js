@@ -6,6 +6,4 @@ export default class HistoryState extends StateBase {
   }
 }
 
-HistoryState.TEMPLATE = {
-  winners: function winners() { return 'not_implemented'; },
-};
+HistoryState.TEMPLATE = ['winners'];

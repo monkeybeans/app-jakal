@@ -1,6 +1,6 @@
 {
   "period":"suggest",
-  "time_to_new_period":7,
+  "days_to_next_period":7,
   "elapsed_period_time":13,
   "last_winner":null
 }

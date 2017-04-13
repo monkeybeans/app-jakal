@@ -1,20 +1,27 @@
 import test from 'ava';
 import StateBase from '../../src/reducers/states/StateBase';
 
-const TEMPLATE = {
-  propTranslated: 'prop_translated',
-  propFuncTranslated: function input_value(v) { return v; },
-};
+const TEMPLATE = [
+  'propOne', 'propTwo',
+];
+
+test('allows props that are registred', (t) => {
+  const base = new StateBase({ propOne: 'apa', propTwo: 'banan', propNotInTemplate: 'should be omitted' }, undefined, TEMPLATE);
+
+  t.truthy(base.propNotInTemplate === undefined);
+});
+
 
 test('does not allow extra props', (t) => {
-  base = new StateBase({ prop_translated: 'apa', input_value: 'banan' }, null, TEMPLATE);
-  t.fail();
+  const base = new StateBase({ propOne: 'apa', propTwo: 'banan', propNotInTemplate: 'should be omitted' }, undefined, TEMPLATE);
+
+  t.truthy(base.propNotInTemplate === undefined);
 });
 
-test('maps input to internal names', (t) => {
-  t.fail();
-});
+test('allows an inheritance', (t) => {
+  const base = new StateBase({ propOne: 'banan' }, undefined, TEMPLATE);
+  const base2 = new StateBase({ propTwo: 'apa' }, base, TEMPLATE);
 
-test('uses inheritance from an other instance', (t) => {
-  t.fail();
+  t.truthy(base2.propOne === 'banan');
+  t.truthy(base2.propTwo === 'apa');
 });

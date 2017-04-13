@@ -47,12 +47,12 @@ class VotingList extends React.Component {
   }
 
   render() {
-    const { config } = this.props;
+    const { config, dynamics } = this.props;
     return (
       <div className="vote-list">
         <h2>Current suggestions.</h2>
         <p>Current time <b>{config.period}</b> - days left <b>{config.daysToNextPeriod}</b></p>
-        { this.props.dynamics.suggestions.map(this.renderVoteItem) }
+        { dynamics.suggestions.map(this.renderVoteItem) }
       </div>
     );
   }

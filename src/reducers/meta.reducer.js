@@ -1,31 +1,69 @@
 import actionEnum from '../actions/action.enum';
 import { ConfigState, DynamicsState, HistoryState } from './states';
 import { readCookieValue } from '../core/store-config';
+import { PeriodEnum, SuggestionModel } from '../models';
 
-export function config(state = new ConfigState(), action) {
+function period(value) {
+  switch (value && value.toLowerCase()) {
+    case 'suggest': return PeriodEnum.SUGGEST;
+    case 'vote': return PeriodEnum.VOTE;
+    case 'display': return PeriodEnum.DISPLAY;
+    default: return undefined;
+  }
+}
+
+
+function config(state = new ConfigState(), action) {
   switch (action.type) {
     case actionEnum.UPDATE_CONFIG:
-      Object.assign(action.data, { votingAllowed: readCookieValue('voting_done') !== true });
+      return new ConfigState({
+        votingAllowed: readCookieValue('voting_done') !== true,
+        period: period(action.data.period),
+        daysToNextPeriod: action.data.days_to_next_period,
+        daysElapsedPeriod: action.data.elapsed_period_time,
+      });
 
-      return new ConfigState(action.data);
     case actionEnum.TOGGLE_VOTING_RIGHT:
       return new ConfigState({ votingAllowed: action.hasRight }, state);
+
     default:
       return state;
   }
 }
 
-export function dynamics(state = new DynamicsState(), action) {
+function dynamics(state = new DynamicsState({ suggestions: [] }), action) {
+  const mapSuggestions = data => data
+    .map(d => new SuggestionModel({
+      id: d.id,
+      name: d.name,
+      description: d.description,
+      numVotes: d.num_votes,
+      submitted: d.submitted,
+      submitter: d.submitter,
+    }));
+
   switch (action.type) {
     case actionEnum.UPDATE_DYNAMICS:
-      return new DynamicsState(action.data);
+      return new DynamicsState({
+        suggestions: mapSuggestions(action.data.suggestions),
+      });
+
     default: return state;
   }
 }
 
-export function history(state = new HistoryState(), action) {
+function history(state = new HistoryState(), action) {
   switch (action.type) {
-    case actionEnum.UPDATE_HISTORY: return new HistoryState(action.data);
+    case actionEnum.UPDATE_HISTORY: return new HistoryState({
+      history: action.data,
+    });
+
     default: return state;
   }
 }
+
+export {
+  config,
+  dynamics,
+  history,
+};

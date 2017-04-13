@@ -1,18 +1,25 @@
 class StateBase {
-  constructor(props = {}, inheritance = {}, template) {
-    Object.assign(this, inheritance);
+  constructor(props = {}, inheritance = {}, template = []) {
+    if (!(inheritance instanceof StateBase) && JSON.stringify(inheritance) !== '{}') { throw new Error('inheritance is not of type StateBase'); }
 
-    Object.keys(template).forEach((tk) => {
-      const templateMapper = template[tk];
-      const propKey = typeof templateMapper === 'function' ? templateMapper.name : templateMapper;
+    const filterObject = filter => o => Object.keys(o).reduce((acc, prop) => {
+      if (filter.indexOf(prop) !== -1) {
+        acc[prop] = o[prop];
+      } else {
+        console.error(`Recieved unkonwn prop: ${prop}`); // eslint-disable-line no-console
+      }
 
-      if (!propKey) { throw new Error(`Unknown state prop: ${propKey}`); }
+      return acc;
+    }, {});
 
-      const propValue = props[propKey];
-      const mappedValue = typeof templateMapper === 'function' ? templateMapper(propValue) : propValue;
+    const inheritObject = from => to => Object.assign(to, from);
 
-      this[tk] = mappedValue !== undefined ? mappedValue : this[tk];
+    const filteredProps = filterObject(template)(props);
+    Object.keys(filteredProps).forEach((p) => {
+      this[p] = filteredProps[p];
     });
+
+    inheritObject(inheritance)(this);
   }
 
 }

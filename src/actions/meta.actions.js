@@ -35,6 +35,7 @@ function updateHistory(dispatch) {
 }
 
 export {
+  a as action,
   updateConfig,
   updateDynamics,
   updateHistory,
