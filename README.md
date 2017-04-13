@@ -1,8 +1,8 @@
 # app-jakal
 
 ## TOOD
-* Unit tests
 * Styling
+* split up code
 * deploy script
 * Statistics section
 * https
@@ -12,7 +12,7 @@
 * hamburger
 
 ## Run
-```npm start```
+```yarn start```
 
 ## Build
-```npm run build```
+```yarn run build```
