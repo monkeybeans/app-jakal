@@ -1,12 +1,13 @@
 @keyframes pop-letter {
   0% {
     position: relative; }
-  8% {
+  7% {
     position: relative;
-    transform: translateX(50vw) scale(6, 6); }
+    transform: scale(2, 2); }
   10% {
     position: relative;
-    transform: translateX(0) scale(1, 1); } }
+    transform: scale(1, 1);
+    text-shadow: none; } }
 
 html, body {
   background: radial-gradient(white 10%, transparent 11%), radial-gradient(#ffff66 20%, transparent 21%), radial-gradient(#ff6666 40%, transparent 41%), radial-gradient(#ff66ff 50%, transparent 51%), cyan;

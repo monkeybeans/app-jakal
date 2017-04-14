@@ -12,7 +12,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: prodVsDev('[name].[chunkhash].js', '[name].js'),
+    filename: prodVsDev('[name].js', '[name].js'),
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
@@ -46,7 +46,7 @@ module.exports = {
   devServer: {
     contentBase: path.resolve(__dirname, 'web'), // static content
     watchContentBase: false,
-    publicPath: '/dist', // bundle file path
+    publicPath: '/jakal/dist', // bundle file path
     compress: true,
     port: 9000,
     proxy: {
