@@ -2,8 +2,10 @@
 
 .header {
   width: 100%;
-  background: linear-gradient(162deg, #FFF 15%, #F0E295 80%, #97CDE7) no-repeat;
+  //background: linear-gradient(162deg, #FFF 15%, #F0E295 80%, #97CDE7) no-repeat;
+  background: lighten($success-clr, 20%);
   text-align: center;
   padding: 2rem;
-  box-shadow: 0rem 0.5rem 1rem $shadow-clr;
+  //box-shadow: 0rem 0.5rem 1rem $shadow-clr;
+  position: relative;
 }
