@@ -49,7 +49,7 @@ test('fetches dynamics data and map to a model', async (t) => {
 
   await updateConfig(dispatch);
 
-  sinon.assert.calledWith(dispatch, {
+  t.deepEqual(dispatch.firstCall.args[0], {
     type: actionEnum.UPDATE_CONFIG,
     data: fixtures.config_display,
   });
@@ -60,7 +60,7 @@ test('fetches static data and map to a model', async (t) => {
 
   await updateDynamics(dispatch);
 
-  sinon.assert.calledWith(dispatch, {
+  t.deepEqual(dispatch.firstCall.args[0], {
     type: actionEnum.UPDATE_DYNAMICS,
     data: fixtures.dynamics,
   });
@@ -71,7 +71,7 @@ test.skip('fetches historical data and map to a model', async (t) => {
 
   await updateHistory(dispatch);
 
-  sinon.assert.calledWith(dispatch, {
+  t.deepEqual(dispatch.firstCall.args[0], {
     type: actionEnum.UPDATE_HISTORY,
     data: fixtures.history,
   });
@@ -86,7 +86,7 @@ test('post suggestion', async (t) => {
 
   await submitSuggestion(dispatch, suggestion);
 
-  sinon.assert.calledWith(dispatch, {
+  t.deepEqual(dispatch.firstCall.args[0], {
     type: actionEnum.UPDATE_DYNAMICS,
     data: fixtures.dynamics,
   });
@@ -97,7 +97,12 @@ test('post voting', async (t) => {
 
   await voteForSuggestion(dispatch, VOTE_ID);
 
-  sinon.assert.calledWith(dispatch, {
+  t.deepEqual(dispatch.firstCall.args[0], {
+    type: actionEnum.TOGGLE_VOTING_RIGHT,
+    hasRight: false,
+  });
+
+  t.deepEqual(dispatch.secondCall.args[0], {
     type: actionEnum.VOTING_DONE,
     data: fixtures.dynamics,
   });

@@ -1,4 +1,6 @@
 node_modules
+dist
+
 web/assets/scripts/app-jakal.js.map
 web/assets/scripts/app-jakal.js
 npm-debug.log

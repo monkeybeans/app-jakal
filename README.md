@@ -2,7 +2,6 @@
 
 ## TOOD
 * Styling
-* split up code
 * deploy script
 * Statistics section
 * https

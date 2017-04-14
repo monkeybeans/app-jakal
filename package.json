@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "nodemon server.js",
-    "build": "webpack -p",
+    "build": "NODE_ENV='production' webpack -p #follow https://github.com/webpack/webpack/issues/2537",
     "start": "webpack-dev-server --hot --inline",
     "test": "ava"
   },
@@ -21,7 +21,7 @@
     "superagent": "^3.5.2"
   },
   "devDependencies": {
-    "ava": "0.18.2",
+    "ava": "0.19.1",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.0",
     "babel-eslint": "^7.2.1",
@@ -49,7 +49,7 @@
     "sass-loader": "6.0.3",
     "sinon": "^2.1.0",
     "style-loader": "0.16.1",
-    "webpack": "2.3.2",
+    "webpack": "2.3.3",
     "webpack-dev-server": "^2.4.2"
   },
   "ava": {

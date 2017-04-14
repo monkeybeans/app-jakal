@@ -1,14 +1,29 @@
-const path = require('path');
+import path from 'path';
+import webpack from 'webpack';
+
+const prodVsDev = (prod, dev) => process.env.NODE_ENV === 'production' ? prod : dev; // eslint-disable-line no-confusing-arrow
 
 module.exports = {
-  entry: './src/index.js',
-  output: {
-    path: path.join(__dirname, '/web/assets/scripts'),
-    filename: 'app-jakal.js',
-  },
   resolve: {
     extensions: ['.js', '.jsx'],
   },
+  entry: {
+    'app-jakal': './src/index.js',
+  },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: prodVsDev('[name].[chunkhash].js', '[name].js'),
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: module => module.context && module.context.indexOf('node_modules') !== -1,
+    }),
+    // keeps the hashes unchanged when changing code in other chunk
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+    }),
+  ],
   module: {
     rules: [
       {
@@ -34,7 +49,7 @@ module.exports = {
   },
   devtool: '#inline-source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'web'), // static content
+    contentBase: path.resolve(__dirname, 'web'), // static content
     watchContentBase: false,
     publicPath: '/dist', // bundle file path
     compress: true,
