@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
+import Linkify from 'react-linkify';
 import { voteForSuggestion } from '../../actions';
 import { PeriodEnum } from '../../models';
 import './voting-list.scss';
@@ -40,7 +41,11 @@ class VotingList extends React.Component {
           { suggestion.name.value }
           { config.period === PeriodEnum.DISPLAY ? numVotesElem : null }
         </h2>
-        <p>{ suggestion.description.value }</p>
+        <p>
+          <Linkify properties={{ target: '_blank' }}>
+            { suggestion.description.value }
+          </Linkify>
+        </p>
         { this.renderVoteButton(suggestion.id.value) }
       </div>
     );
