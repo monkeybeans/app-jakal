@@ -1,3 +1,13 @@
+@keyframes pop-letter {
+  0% {
+    position: relative; }
+  8% {
+    position: relative;
+    transform: translateX(50vw) scale(6, 6); }
+  10% {
+    position: relative;
+    transform: translateX(0) scale(1, 1); } }
+
 html, body {
   background: radial-gradient(white 10%, transparent 11%), radial-gradient(#ffff66 20%, transparent 21%), radial-gradient(#ff6666 40%, transparent 41%), radial-gradient(#ff66ff 50%, transparent 51%), cyan;
   background-position: -40px -40px, -30px 0px, 10px 50px, 75px 75px;
@@ -14,21 +24,23 @@ html, body {
     font-weight: bold;
     position: relative;
     display: inline-block; }
-
-@keyframes pop-letter {
-  0% {
-    position: relative; }
-  2% {
-    position: relative;
-    transform: translateX(50vw); }
-  90% {
-    position: relative;
-    transform: translateX(50vw) scale(6, 6); }
-  95% {
-    position: relative;
-    transform: translateX(50vw) scale(1, 1); }
-  98% {
-    position: relative;
-    transform: translateX(0); } }
   .app-loading span:nth-child(1) {
-    animation: pop-letter 6s infinite; }
+    animation: pop-letter 10s 0s infinite; }
+  .app-loading span:nth-child(2) {
+    animation: pop-letter 10s 1s infinite; }
+  .app-loading span:nth-child(3) {
+    animation: pop-letter 10s 2s infinite; }
+  .app-loading span:nth-child(4) {
+    animation: pop-letter 10s 3s infinite; }
+  .app-loading span:nth-child(5) {
+    animation: pop-letter 10s 4s infinite; }
+  .app-loading span:nth-child(6) {
+    animation: pop-letter 10s 5s infinite; }
+  .app-loading span:nth-child(7) {
+    animation: pop-letter 10s 6s infinite; }
+  .app-loading span:nth-child(8) {
+    animation: pop-letter 10s 7s infinite; }
+  .app-loading span:nth-child(9) {
+    animation: pop-letter 10s 8s infinite; }
+  .app-loading span:nth-child(10) {
+    animation: pop-letter 10s 9s infinite; }
