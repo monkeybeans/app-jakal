@@ -1,4 +1,9 @@
+@import './../../style/_palette';
+
 .header {
   width: 100%;
-  background: lime;
+  background: linear-gradient(162deg, #FFF 15%, #F0E295 80%, #97CDE7) no-repeat;
+  text-align: center;
+  padding: 2rem;
+  box-shadow: 0rem 0.5rem 1rem $shadow-clr;
 }

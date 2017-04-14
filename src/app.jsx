@@ -18,10 +18,12 @@ class App extends React.Component {
 
   render() {
     return (
-      <Grid>
+      <div>
         <Header />
-        <SectionCurrent />
-      </Grid>
+        <Grid>
+          <SectionCurrent />
+        </Grid>
+      </div>
     );
   }
 }
