@@ -3,38 +3,36 @@
 $dot-size1: 25%;
 $dot-size2: 26%;
 $background-clr: lighten($success-clr, 20%);
+$stripe-color: darken(#FFF, 5%);
+
+@function background-line($inclination, $position, $width, $color) {
+  $lstart: calc(#{$position} - #{$width} / 2);
+  $lend: calc(#{$position} + #{$width} / 2);
+  $lbefore: calc(#{$lstart} - 1);
+  $lafter: calc(#{$lend} + 1);
+
+  @return linear-gradient(
+    $inclination,
+    transparent calc(#{$lbefore} * 1%),
+    $color calc(#{$lstart} * 1%),
+    $color calc(#{$lend} * 1%),
+    transparent calc(#{$lafter} * 1%)
+  );
+}
 
 .header {
   width: 100%;
-  //background: linear-gradient(162deg, #FFF 15%, #F0E295 80%, #97CDE7) no-repeat;
-  background: $background-clr;
+  background:
+    background-line(15deg, 30, 1, $stripe-color),
+    background-line(45deg, 40, 1, $stripe-color),
+    background-line(135deg, 60, 1, $stripe-color),
+    background-line(165deg, 70, 1, $stripe-color),
+    linear-gradient(0deg, $stripe-color, $background-clr),
+    no-repeat $background-clr;
   text-align: center;
   padding: 2rem;
   box-shadow: 0rem 0.5rem 1rem $shadow-clr;
+  text-shadow: 0 2px 2px $background-clr;
   position: relative;
   white-space: nowrap;
-  perspective: 120px;
-
-  h1:nth-child(2) {
-    transform: rotateX(190deg);
-    display: block;
-    //content: attr(data-reflection-text);
-    padding-top: 0;
-    margin-top: 5px;
-    background: transparent;
-    color: $shadow-clr;
-    position: relative;
-  }
-
-  h1:nth-child(2):after {
-    content: '\00a0';
-    background: linear-gradient(180deg, $background-clr, transparent 85%);
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-  }
-  h1:after {
-  }
-
 }
