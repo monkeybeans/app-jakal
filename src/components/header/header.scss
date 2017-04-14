@@ -2,26 +2,39 @@
 
 $dot-size1: 25%;
 $dot-size2: 26%;
+$background-clr: lighten($success-clr, 20%);
 
 .header {
   width: 100%;
   //background: linear-gradient(162deg, #FFF 15%, #F0E295 80%, #97CDE7) no-repeat;
-  background: lighten($success-clr, 20%);
+  background: $background-clr;
   text-align: center;
   padding: 2rem;
   box-shadow: 0rem 0.5rem 1rem $shadow-clr;
   position: relative;
   white-space: nowrap;
+  perspective: 120px;
 
-  h1:after {
+  h1:nth-child(2) {
+    transform: rotateX(190deg);
     display: block;
-    content: attr(data-reflection-text);
+    //content: attr(data-reflection-text);
     padding-top: 0;
     margin-top: 5px;
-    color: transparent;
-    //background: $shadow-clr;
-    background-clip: text;
-    transform: scale(1, -1);
-    opacity: .2;
+    background: transparent;
+    color: $shadow-clr;
+    position: relative;
   }
+
+  h1:nth-child(2):after {
+    content: '\00a0';
+    background: linear-gradient(180deg, $background-clr, transparent 85%);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  h1:after {
+  }
+
 }
