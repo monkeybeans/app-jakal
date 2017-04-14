@@ -1,0 +1,34 @@
+html, body {
+  background: radial-gradient(white 10%, transparent 11%), radial-gradient(#ffff66 20%, transparent 21%), radial-gradient(#ff6666 40%, transparent 41%), radial-gradient(#ff66ff 50%, transparent 51%), cyan;
+  background-position: -40px -40px, -30px 0px, 10px 50px, 75px 75px;
+  background-size: 200px 200px; }
+
+.app-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap; }
+  .app-loading span {
+    font-size: 10vh;
+    font-weight: bold;
+    position: relative;
+    display: inline-block; }
+
+@keyframes pop-letter {
+  0% {
+    position: relative; }
+  2% {
+    position: relative;
+    transform: translateX(50vw); }
+  90% {
+    position: relative;
+    transform: translateX(50vw) scale(6, 6); }
+  95% {
+    position: relative;
+    transform: translateX(50vw) scale(1, 1); }
+  98% {
+    position: relative;
+    transform: translateX(0); } }
+  .app-loading span:nth-child(1) {
+    animation: pop-letter 6s infinite; }

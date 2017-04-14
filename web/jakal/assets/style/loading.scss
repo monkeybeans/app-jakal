@@ -1,0 +1,56 @@
+@function radial-bubble($color, $size) {
+  @return radial-gradient($color $size * 1%, transparent ($size + 1) * 1%);
+}
+
+html, body {
+  background:
+    radial-bubble(lighten(#FFF, 20%), 10),
+    radial-bubble(lighten(#FF0, 20%), 20),
+    radial-bubble(lighten(#F00, 20%), 40),
+    radial-bubble(lighten(#F0F, 20%), 50),
+    cyan;
+  background-position: -40px -40px, -30px 0px, 10px 50px, 75px 75px;
+  background-size: 200px 200px;
+}
+
+.app-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+
+
+  span {
+    font-size: 10vh;
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+  }
+
+  @keyframes pop-letter {
+    0% {
+      position: relative;// color: blue;
+    }
+    2% {
+      position: relative;
+      transform: translateX(50vw);
+    }
+    90% {
+      position: relative;
+      transform: translateX(50vw) scale(6,6);
+    }
+    95% {
+      position: relative;
+      transform: translateX(50vw) scale(1,1);
+    }
+    98% {
+      position: relative;
+      transform: translateX(0);
+    }
+  }
+
+  span:nth-child(1) {
+    animation: pop-letter 6s infinite;
+  }
+}
