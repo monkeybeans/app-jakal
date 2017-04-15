@@ -53,9 +53,16 @@ function dynamics(state = new DynamicsState({ suggestions: [] }), action) {
 }
 
 function history(state = new HistoryState(), action) {
+  const mapHistory = data => data
+    .map(d => ({
+      name: d.name,
+      description: d.description,
+      numVotes: d.num_votes,
+    }));
+
   switch (action.type) {
     case actionEnum.UPDATE_HISTORY: return new HistoryState({
-      history: action.data,
+      winners: mapHistory(action.data.last_winners),
     });
 
     default: return state;

@@ -22,6 +22,8 @@ test.before(() => {
   .reply(200, fixtures.config_display)
   .get(`/${endpointMapping.META_DYNAMICS}`)
   .reply(200, fixtures.dynamics)
+  .get(`/${endpointMapping.META_HISTORY}`)
+  .reply(200, fixtures.history)
   .get(`/${endpointMapping.META_VOTE}`)
   .reply(200, {})
   .post(`/${endpointMapping.SUGGESTIONS}`)
@@ -66,7 +68,7 @@ test('fetches static data and map to a model', async (t) => {
   });
 });
 
-test.skip('fetches historical data and map to a model', async (t) => {
+test('fetches historical data and map to a model', async (t) => {
   const { dispatch } = t.context;
 
   await updateHistory(dispatch);

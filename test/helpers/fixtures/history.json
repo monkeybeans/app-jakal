@@ -1,0 +1,41 @@
+{
+  "last_winners": [
+    {
+      "name": "Banana Inc.",
+      "description": "More bananas for the people!",
+      "num_votes": 99
+    },
+    {
+      "id": 7,
+      "name": "Tobii",
+      "description": "går bra nu. ",
+      "submitter": null,
+      "submitted": null,
+      "num_votes": 4
+    },
+    {
+      "id": 8,
+      "name": "Alelion Energy Systems AB",
+      "description": "Företag som utvecklar nya typer av batterier, något som kan bli hett när alternativa bränslen efterfrågas.",
+      "submitter": null,
+      "submitted": null,
+      "num_votes": 3
+    },
+    {
+      "id": 11,
+      "name": "Dalsspira Mejeri AB",
+      "description": "Litet företag som producerar getost bla. Kanske mer kul än spännande aktie. Men kan kanske få en andra hajp om vi har tur och ekotrenden håller i sig.",
+      "submitter": null,
+      "submitted": null,
+      "num_votes": 3
+    },
+    {
+      "id": 12,
+      "name": "Intrum Justitia",
+      "description": "Bolag som brukar gå bra när skulder ska regleras och from hösten 2018 är nog stor del av den svenska medelklassen där.",
+      "submitter": null,
+      "submitted": null,
+      "num_votes": 4
+    }
+  ]
+}

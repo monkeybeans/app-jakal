@@ -33,15 +33,17 @@ test('updated dynamics state', (t) => {
   t.deepEqual(state.suggestions[0], firstExpected);
 });
 
-test.skip('updated history state', (t) => {
-  const state = history(undefined, metaAction.updateHistory(fixtures.config_display));
+test('updated history state', (t) => {
+  const state = history(undefined, metaAction.updateHistory(fixtures.history));
+  const firstExpected = {
+    name: 'Banana Inc.',
+    description: 'More bananas for the people!',
+    numVotes: 99,
+  };
 
-  t.deepEqual(state, new HistoryState({
-    daysElapsedPeriod: 13,
-    daysToNextPeriod: 7,
-    period: 'DISPLAY',
-    votingAllowed: true,
-  }));
+  t.truthy(state instanceof HistoryState);
+  t.truthy(state.winners.length === 5);
+  t.deepEqual(state.winners[0], firstExpected);
 });
 
 
