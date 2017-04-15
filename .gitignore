@@ -1,5 +1,6 @@
 node_modules
 dist
+jakal-deploy-distribution
 
 web/assets/scripts/app-jakal.js.map
 web/assets/scripts/app-jakal.js

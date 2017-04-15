@@ -8,7 +8,9 @@
     "serve": "nodemon server.js",
     "build": "NODE_ENV='production' webpack -p #follow https://github.com/webpack/webpack/issues/2537",
     "start": "webpack-dev-server --hot --inline",
-    "test": "ava"
+    "test": "ava",
+    "predeploy": "npm run test && npm run build",
+    "deploy": "babel-node deploy.js"
   },
   "author": "monkeybean",
   "license": "ISC",
@@ -44,6 +46,7 @@
     "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-plugin-react": "^6.9.0",
     "express": "^4.14.0",
+    "fs-extra": "^2.1.2",
     "ignore-styles": "^5.0.1",
     "nock": "^9.0.11",
     "node-sass": "^4.3.0",

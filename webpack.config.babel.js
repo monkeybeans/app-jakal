@@ -8,20 +8,20 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   entry: {
-    'app-jakal': './src/index.js',
+    'c_app-jakal': './src/index.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: prodVsDev('[name].js', '[name].js'),
+    filename: prodVsDev('[name].[chunkHash].js', '[name].js'),
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
+      name: 'b_vendor',
       minChunks: module => module.context && module.context.indexOf('node_modules') !== -1,
     }),
     // keeps the hashes unchanged when changing code in other chunk
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest',
+      name: 'a_manifest',
     }),
   ],
   module: {
