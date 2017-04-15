@@ -1,8 +1,11 @@
 import React from 'react';
-import { Grid } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Header from './components/header';
-import SectionCurrent from './components/section-current';
+import AddSuggestion from './components/add-suggestion';
+import VotingList from './components/voting-list';
+import History from './components/history';
+
 import './style/reset.scss';
 import { updateConfig, updateDynamics, updateHistory } from './actions';
 
@@ -21,7 +24,15 @@ class App extends React.Component {
       <div>
         <Header />
         <Grid>
-          <SectionCurrent />
+          <Row>
+            <Col xs={12} md={8}>
+              <VotingList />
+              <AddSuggestion />
+            </Col>
+            <Col xs={12} md={4}>
+              <History />
+            </Col>
+          </Row>
         </Grid>
       </div>
     );

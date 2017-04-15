@@ -52,7 +52,7 @@ function dynamics(state = new DynamicsState({ suggestions: [] }), action) {
   }
 }
 
-function history(state = new HistoryState(), action) {
+function history(state = new HistoryState({ winners: [] }), action) {
   const mapHistory = data => data
     .map(d => ({
       name: d.name,
