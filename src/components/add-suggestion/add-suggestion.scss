@@ -4,6 +4,19 @@
     padding: 2rem 1rem 2rem 1rem;
     background: lighten($success-clr, 30%);
 
+    input, textarea {
+      padding: 1rem !important;
+    }
+
+    &__submit {
+      text-align: center;
+      margin-top: 2rem;
+
+      button: {
+        display: inline-block;
+      }
+    }
+
     label, input {
       //font-size: 5rem;
     }

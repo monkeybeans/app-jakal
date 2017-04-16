@@ -89,11 +89,13 @@ class AddSuggestion extends React.Component {
             validationState={this.validationState('description')}
           />
 
-          <Button
-            type="submit"
-            bsStyle="primary"
-            bsSize="large"
-          >Add your suggestion</Button>
+          <div className="add-suggestion__submit">
+            <Button
+              type="submit"
+              bsStyle="primary"
+              bsSize="large"
+            >Add your suggestion</Button>
+          </div>
         </form>
       </div>
     );

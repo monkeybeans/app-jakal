@@ -33,7 +33,7 @@
     background: linear-gradient(0deg, transparent 95%, rgba(0, 230, 230, 0.5) 100%), linear-gradient(90deg, transparent 95%, rgba(0, 230, 230, 0.5) 100%), linear-gradient(180deg, transparent 95%, rgba(0, 230, 230, 0.5) 100%), linear-gradient(270deg, transparent 95%, rgba(0, 230, 230, 0.5) 100%);
     background-blend-mode: luminosity; }
   .app-loading span {
-    font-size: 10vh;
+    font-size: 5vh;
     font-weight: bold;
     position: relative;
     display: inline-block; }

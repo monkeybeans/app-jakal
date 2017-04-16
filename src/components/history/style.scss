@@ -1,4 +1,5 @@
 @import '../../style/_palette';
+@import '../../style/layout';
 
 // $serious-smile: #f09819;
 // $easy-smile: #edde5d;
@@ -28,6 +29,10 @@
 }
 
 .history {
+  @include use-for-device-smaller-than($tablet) {
+    margin-top: 5rem;
+  }
+
   &__winner-standfirst {
     //animation: hover 2s infinite alternate;
     background: radial-gradient(ellipse closest-corner, transparent 40%, #FFF, $easy-smile);

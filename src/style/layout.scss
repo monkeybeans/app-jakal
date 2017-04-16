@@ -3,12 +3,6 @@ $tablet: 992px;
 $desktop: 1200px;
 $widescreen: 9999px;
 
-@mixin use-for-device($size) {
-  @media  only screen and (max-width: $size) {
-    @content;
-  }
-}
-
 @mixin use-for-device-smaller-than($size) {
   @media only screen and (max-width: $size) {
     @content;

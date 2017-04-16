@@ -9,8 +9,7 @@
 
 .vote-list__vote-item {
   border: 1px solid lightgray;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-top: 1rem;
   margin-left: 1rem;
   margin-right: 1rem;
   padding: 1rem 2rem 3em 1rem;
@@ -18,6 +17,10 @@
   display: inline-block;
   position: relative;
   //width: 100%;
+
+  &:last-child {
+    margin-bottom: 1rem;
+  }
 
   @include use-for-device-smaller-than($tablet) {
     flex-basis: 100%;
