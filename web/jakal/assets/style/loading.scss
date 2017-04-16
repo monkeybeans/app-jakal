@@ -2,39 +2,67 @@
   @return radial-gradient($color $size * 1%, transparent ($size + 1) * 1%);
 }
 
+@function end-gradient($direction) {
+  @return linear-gradient($direction, transparent 95%, darken(rgba(0, 255, 255, .5), 5%) 100%);
+}
+
 @keyframes pop-letter {
   0% {
     position: relative;// color: blue;
   }
-  7% {
+  20% {
     position: relative;
-    transform: scale(2,2);
+    transform: scale(2,4);
   }
-  10% {
+  40% {
     position: relative;
     transform: scale(1,1);
     text-shadow: none;
   }
 }
 
-html, body {
-  background:
-    radial-bubble(lighten(#FFF, 20%), 10),
-    radial-bubble(lighten(#FF0, 20%), 20),
-    radial-bubble(lighten(#F00, 20%), 40),
-    radial-bubble(lighten(#F0F, 20%), 50),
-    cyan;
-  background-position: -40px -40px, -30px 0px, 10px 50px, 75px 75px;
-  background-size: 200px 200px;
-}
 
 .app-loading {
+  background:
+  radial-bubble(lighten(#FFF, 20%), 5),
+  radial-bubble(lighten(#FF0, 20%), 10),
+  radial-bubble(lighten(#F00, 20%), 20),
+  radial-bubble(lighten(#F0F, 20%), 40),
+  cyan;
+  background-position: -40px -40px, -30px 0px, 10px 50px, 75px 75px;
+  background-size: 200px 200px;
+
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   white-space: nowrap;
+  height: 50vh;
+  width: 50vw;
+  vertical-align: middle;
 
+  border-radius: 10%;
+  box-shadow:
+    0 0 15vh darken(cyan, 5%),
+    0 0 30vh darken(cyan, 40%);
+
+  div {
+    text-align: center;
+    line-height: 50vh;
+    display: inline-block;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+
+    background:
+      //radial-gradient(rgba(200, 255, 255, .8), rgba(150, 255, 255, .6) 10%, rgba(0, 255, 255, .3) 30%, transparent),
+      end-gradient(0deg),
+      end-gradient(90deg),
+      end-gradient(180deg),
+      end-gradient(270deg);
+    background-blend-mode: luminosity;
+
+  }
 
   span {
     font-size: 10vh;
@@ -44,14 +72,11 @@ html, body {
   }
 
 
-  span:nth-child(1) { animation: pop-letter 10s 0s infinite }
-  span:nth-child(2) { animation: pop-letter 10s 1s infinite }
-  span:nth-child(3) { animation: pop-letter 10s 2s infinite }
-  span:nth-child(4) { animation: pop-letter 10s 3s infinite }
-  span:nth-child(5) { animation: pop-letter 10s 4s infinite }
-  span:nth-child(6) { animation: pop-letter 10s 5s infinite }
-  span:nth-child(7) { animation: pop-letter 10s 6s infinite }
-  span:nth-child(8) { animation: pop-letter 10s 7s infinite }
-  span:nth-child(9) { animation: pop-letter 10s 8s infinite }
-  span:nth-child(10) { animation: pop-letter 10s 9s infinite }
+  span:nth-child(1) { animation: pop-letter 3.5s 0s infinite }
+  span:nth-child(2) { animation: pop-letter 3.5s .5s infinite }
+  span:nth-child(3) { animation: pop-letter 3.5s 1s infinite }
+  span:nth-child(4) { animation: pop-letter 3.5s 1.5s infinite }
+  span:nth-child(5) { animation: pop-letter 3.5s 2s infinite }
+  span:nth-child(6) { animation: pop-letter 3.5s 2.5s infinite }
+  span:nth-child(7) { animation: pop-letter 3.5s 3s infinite }
 }

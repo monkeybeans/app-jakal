@@ -22,8 +22,8 @@ body {
 
 html, body {
   background:
-    radial-bubble(#FFF, 15),
-    radial-bubble(#FFF, 15),
+    radial-bubble(#FFF, 20),
+    radial-bubble(#FFF, 20),
     darken($attention-clr, 20%);
   background-position: 0 0, 20px 20px;
   background-size:40px 40px;

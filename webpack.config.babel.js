@@ -49,6 +49,7 @@ module.exports = {
     publicPath: '/jakal/dist', // bundle file path
     compress: true,
     port: 9000,
+    host: '0.0.0.0',
     proxy: {
       '/api/v1': 'http://localhost:8085',
     },

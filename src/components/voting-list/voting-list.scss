@@ -1,18 +1,31 @@
-.vote-item {
+@import '../../style/layout.scss';
+
+.vote-list__items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.vote-list__vote-item {
   border: 1px solid lightgray;
-  margin: 2rem 0;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   padding: 1rem 2rem 3em 1rem;
   border-radius: 3px;
+  display: inline-block;
   position: relative;
+  //width: 100%;
 
-  h2 {
-    padding: 0 0 1rem 0;
-    font-size: 4rem;
-  }
+  @include use-for-device-smaller-than($tablet) {
+    flex-basis: 100%;
+  };
 
-  p {
-    font-size: 3rem;
-  }
+  @include use-for-device-between($tablet, $widescreen) {
+    flex-basis: 45%;
+  };
 
   button {
     margin: 3rem 0 0 0;

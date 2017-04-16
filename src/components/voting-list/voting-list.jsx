@@ -37,11 +37,11 @@ class VotingList extends React.Component {
     const numVotesElem = <span className="vote-item__num-votes">{suggestion.numVotes.value}</span>;
 
     return (
-      <div className="vote-item" key={suggestion.id.value}>
-        <h2>
+      <div className="vote-list__vote-item" key={suggestion.id.value}>
+        <h3>
           { suggestion.name.value }
           { config.period === PeriodEnum.DISPLAY ? numVotesElem : null }
-        </h2>
+        </h3>
         <p>
           <Linkify properties={{ target: '_blank' }}>
             { suggestion.description.value }
@@ -56,7 +56,7 @@ class VotingList extends React.Component {
     const { config, dynamics } = this.props;
     return (
       <div className="vote-list">
-        <h2>Current suggestions.</h2>
+        <h1>Current suggestions.</h1>
         <p>Current time <b>{config.period}</b> - days left <b>{config.daysToNextPeriod}</b></p>
         <div className="vote-list__items">
           { dynamics.suggestions.map(this.renderVoteItem) }
