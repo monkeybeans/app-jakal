@@ -2,18 +2,19 @@
 @import './layout';
 
 $font: Helvetica, sans-serif;
-$root-font-size: 42px; //62.5%;
 
 html {
   box-sizing: border-box;
-  font-size: $root-font-size;
+  font-size: 16px;
+
+  @include use-for-device-smaller-than($tablet) {
+    font-size: 42px;
+  }
 }
 *, *:before, *:after {
   box-sizing: inherit;
 }
 
-@include use-for-device-smaller-than($tablet) {
-}
 
 
 body {

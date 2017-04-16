@@ -1,51 +1,50 @@
 @import '../../style/layout.scss';
 
-.vote-list__items {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.vote-list__vote-item {
-  border: 1px solid lightgray;
-  margin-top: 1rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  padding: 1rem 2rem 3em 1rem;
-  border-radius: 3px;
-  display: inline-block;
-  position: relative;
-  //width: 100%;
-
-  &:last-child {
-    margin-bottom: 1rem;
+.vote-list {
+  padding-bottom: 2rem;
+  
+  &__items {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
-  @include use-for-device-smaller-than($tablet) {
-    flex-basis: 100%;
-  };
+  &__vote-item {
+    border: 1px solid lightgray;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 1rem 2rem 3em 1rem;
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
 
-  @include use-for-device-between($tablet, $widescreen) {
-    flex-basis: 45%;
-  };
+    @include use-for-device-smaller-than($tablet) {
+      flex-basis: 100%;
+    };
 
-  button {
-    margin: 3rem 0 0 0;
-  }
+    @include use-for-device-between($tablet, $widescreen) {
+      flex-basis: 45%;
+    };
 
-  .vote-item__num-votes {
-    position: absolute;
-    color: lightyellow;
-    background: lightblue;
-    border-radius: 50%;
-    width: 5rem;
-    height: 5rem;
-    text-align: center;
-    right: -1rem;
-    top: -1rem;
-    line-height: 5rem;
-    box-shadow: 10px 10px 15px lightgrey;
-    background: radial-gradient(ellipse at 1rem 1rem, #7db9e8 4%,#1e5799 82%);
+    button {
+      margin: 3rem 0 0 0;
+    }
+
+    .vote-item__num-votes {
+      position: absolute;
+      color: lightyellow;
+      background: lightblue;
+      border-radius: 50%;
+      width: 5rem;
+      height: 5rem;
+      text-align: center;
+      right: -1rem;
+      top: -1rem;
+      line-height: 5rem;
+      box-shadow: 10px 10px 15px lightgrey;
+      background: radial-gradient(ellipse at 1rem 1rem, #7db9e8 4%,#1e5799 82%);
+    }
   }
 }
