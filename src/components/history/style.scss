@@ -28,11 +28,11 @@
 }
 
 .history {
-  &__winner-content {
-    animation: hover 2s infinite alternate;
-    background: radial-gradient(ellipse closest-corner, transparent 40%, $easy-smile, #FFF);
+  &__winner-standfirst {
+    //animation: hover 2s infinite alternate;
+    background: radial-gradient(ellipse closest-corner, transparent 40%, #FFF, $easy-smile);
     position: relative;
-    padding: 3rem;
+    padding: 2rem 2rem 1rem 2rem;
     border-radius: 50%;
 
     h3 {
@@ -58,21 +58,26 @@
     }
   }
 
+  &__winner-about {
+    display: none;
+  }
+
   &__list-item {
     margin-bottom: 5rem;
     position: relative;
 
+    // shadow
     &::before {
-      animation: shadow-grow 2s infinite alternate;
+      //animation: shadow-grow 2s infinite alternate;
+      transform: translateX(-50%) rotateX(50deg);
       content: '\00a0';
       width: 60%;
       height: 20%;
       background: radial-gradient($easy-smile, #FFF 70%);
       position: absolute;
-      top: 100%;
+      bottom: -50%;
       left: 50%;
       border-radius: 50%;
-      //box-shadow: 0 2px 10px $easy-smile;
     }
 
   }
