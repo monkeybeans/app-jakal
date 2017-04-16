@@ -15,14 +15,16 @@ class History extends React.Component {
   renderWinners(winners) {
     return winners.map(w => (
       <div className="history__list-item" key={w.description}>
-        <div>
-          <h3>
-            { w.name }
-            <span>{ w.numVotes }</span>
-          </h3>
-        </div>
-        <div>
-          <p>{ w.description }</p>
+        <div className="history__winner-content">
+          <div>
+            <h3>
+              { w.name }
+              <span>{ w.numVotes }</span>
+            </h3>
+          </div>
+          <div>
+            <p>{ w.description }</p>
+          </div>
         </div>
       </div>
     ));
