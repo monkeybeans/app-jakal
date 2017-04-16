@@ -39,6 +39,7 @@ $stripe-color: darken(#FFF, 5%);
     0 -20px 15px #FFF;
   position: relative;
   white-space: nowrap;
+  background-blend-mode: overlay;
 
   h1 {
     padding: 0;
