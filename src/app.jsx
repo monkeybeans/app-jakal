@@ -23,17 +23,19 @@ class App extends React.Component {
     return (
       <div>
         <Header />
-        <Grid>
-          <Row>
-            <Col xs={12} md={8}>
-              <VotingList />
-              <AddSuggestion />
-            </Col>
-            <Col xs={12} md={4}>
-              <History />
-            </Col>
-          </Row>
-        </Grid>
+        <div className="app-body">
+          <Grid fluid>
+            <Row>
+              <Col xs={12} md={8}>
+                <VotingList />
+                <AddSuggestion />
+              </Col>
+              <Col xs={12} md={4}>
+                <History />
+              </Col>
+            </Row>
+          </Grid>
+        </div>
       </div>
     );
   }

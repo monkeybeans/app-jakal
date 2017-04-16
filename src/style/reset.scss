@@ -37,4 +37,11 @@ html, body {
     margin-top: 3rem;
     box-shadow: 5px 5px 5px darken($attention-clr, 30%);
   }
+
+  .app-body {
+    max-width: 1200px;
+    margin: auto;
+    background: #FFF;
+
+  }
 }

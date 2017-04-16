@@ -63,7 +63,7 @@
   }
 
   &__list-item {
-    margin-bottom: 5rem;
+    margin-bottom: 6vh;
     position: relative;
 
     // shadow
@@ -75,7 +75,7 @@
       height: 20%;
       background: radial-gradient($easy-smile, #FFF 70%);
       position: absolute;
-      bottom: -50%;
+      bottom: -4vh;
       left: 50%;
       border-radius: 50%;
     }
